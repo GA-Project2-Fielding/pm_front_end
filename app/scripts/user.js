@@ -12,5 +12,23 @@ var PM = (function (module) {
     files: host + 'files/'
   };
 
+  var Router = Backbone.Router.extend({
+    routes: {
+      '': 'home'
+  },
+  home: function(){
+    var id = '24';
+
+    $.ajax({
+      url: module.apiRoutes.users + id
+    }).done(function(data){
+      console.log(data);
+    }).fail();
+  }
+  });
+
+  var router = new Router();
+  Backbone.history.start();
+
   return module;
 })(PM || {});
