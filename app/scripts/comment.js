@@ -1,5 +1,5 @@
 'use strict';
-console.log('main loaded');
+console.log('comment loaded');
 
 var PM = (function (module) {
   var host = 'http://localhost:3000/';
@@ -14,15 +14,3 @@ var PM = (function (module) {
 
   return module;
 })(PM || {});
-
-
-
-
-
-$(document).ready(function() {
-  $.getScript('scripts/user.js');
-  $.getScript('scripts/project.js');
-  $.getScript('scripts/task.js');
-  $.getScript('scripts/comment.js');
-  $.getScript('scripts/file.js');
-});
