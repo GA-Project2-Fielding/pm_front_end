@@ -9,7 +9,7 @@ var PM = (function (module) {
     projects: host + 'projects/',
     tasks: host + 'tasks/',
     comments: host + 'comments/',
-    files: host + 'files/'
+    fileLocations: host + 'file_locations/'
   };
 
   return module;
