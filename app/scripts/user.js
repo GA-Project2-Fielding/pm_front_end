@@ -9,7 +9,7 @@ var PM = (function (module) {
     projects: host + 'projects/',
     tasks: host + 'tasks/',
     comments: host + 'comments/',
-    files: host + 'files/'
+    fileLocations: host + 'file_locations/'
   };
 
   var Router = Backbone.Router.extend({
@@ -17,7 +17,7 @@ var PM = (function (module) {
       '': 'home'
   },
   home: function(){
-    var id = '24';
+    var id = '24'; // temp for testing
 
     $.ajax({
       url: module.apiRoutes.users + id
@@ -27,7 +27,7 @@ var PM = (function (module) {
   }
   });
 
-  var router = new Router();
+  new Router();
   Backbone.history.start();
 
   return module;

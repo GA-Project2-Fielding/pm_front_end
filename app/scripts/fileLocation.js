@@ -1,5 +1,5 @@
 'use strict';
-console.log('file loaded');
+console.log('fileLocation loaded');
 
 var PM = (function (module) {
   var host = 'http://localhost:3000/';
@@ -9,7 +9,7 @@ var PM = (function (module) {
     projects: host + 'projects/',
     tasks: host + 'tasks/',
     comments: host + 'comments/',
-    files: host + 'files/'
+    fileLocations: host + 'file_locations/'
   };
 
   return module;

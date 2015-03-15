@@ -9,7 +9,7 @@ var PM = (function (module) {
     projects: host + 'projects/',
     tasks: host + 'tasks/',
     comments: host + 'comments/',
-    files: host + 'files/'
+    fileLocations: host + 'file_locations/'
   };
 
   return module;
@@ -24,5 +24,5 @@ $(document).ready(function() {
   $.getScript('scripts/project.js');
   $.getScript('scripts/task.js');
   $.getScript('scripts/comment.js');
-  $.getScript('scripts/file.js');
+  $.getScript('scripts/fileLocation.js');
 });
