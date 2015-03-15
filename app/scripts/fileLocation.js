@@ -1,5 +1,5 @@
 'use strict';
-console.log('file loaded');
+console.log('fileLocation loaded');
 
 var PM = (function (module) {
   var host = 'http://localhost:3000/';
