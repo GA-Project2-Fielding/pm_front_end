@@ -1,8 +1,8 @@
 'use strict';
 console.log('user loaded');
 
-var PM = (function () {
-  var authToken, host = 'http://localhost:3000/';
+var PM = (function (module) {
+  var /* authToken, */ host = 'http://localhost:3000/';
   var apiRoutes = {
       users: host + 'users/',
       projects: host + 'projects/',
@@ -11,22 +11,22 @@ var PM = (function () {
       fileLocations: host + 'file_locations/'
   };
 
-  var runLogin = function(){
-    authToken = localStorage.getItem('authToken');
+  module.runLogin = function(){
+    module.authToken = localStorage.getItem('authToken');
 
-    setupAjaxRequests();
+    module.setupAjaxRequests();
 
-    $('#loginForm').on('submit', submitLogin);
+    $('#loginForm').on('submit', module.submitLogin);
   };
 
-  var setupAjaxRequests = function() {
+  module.setupAjaxRequests = function() {
     $.ajaxPrefilter(function( options ) {
       options.headers = {};
-      options.headers['AUTHORIZATION'] = 'Token token=' + authToken;
+      options.headers['AUTHORIZATION'] = 'Token token=' + module.authToken;
     });
   };
 
-  var submitLogin = function(event) {
+  module.submitLogin = function(event) {
     var $form;
     event.preventDefault();
     $form = $(this);
@@ -35,7 +35,7 @@ var PM = (function () {
       type: 'POST',
       data: $form.serialize()
     })
-    .done(loginSuccess)
+    .done(module.loginSuccess)
     .fail(function(err){
       console.log(err);
     });
@@ -43,14 +43,14 @@ var PM = (function () {
     return false;
   };
 
-  var loginSuccess = function(userData) {
+  module.loginSuccess = function(userData) {
     localStorage.setItem('authToken', userData.token);
     localStorage.setItem('currentUser', userData.id);
     console.log('logged in!');
     window.location.href = '/index.html';
   };
 
-  var acceptFailure = function(error) {
+  module.acceptFailure = function(error) {
     if (error.status === 401) {
       console.log('SEND TO LOGIN SCREEN');
       window.location.href = '/';
@@ -68,16 +68,18 @@ var PM = (function () {
       url: apiRoutes.users + currentUser
     }).done(function(data){
       console.log(data);
-    }).fail();
+    }).fail(function(errors){
+      console.log(errors);
+    });
   }
   });
 
   new Router();
   Backbone.history.start();
 
-  return runLogin;
-})();
+  return module;
+})(PM || {});
 
-$(document).ready(function() {
+$(function() {
   PM.runLogin();
 });

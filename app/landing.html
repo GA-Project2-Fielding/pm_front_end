@@ -26,12 +26,12 @@
         <form id='loginForm'>
           <fieldset>
             <label for='email'>
-              <input type='text' name='email' autofocus='true' />
+              <input type='text' name='email' id='email'autofocus='true' />
               User e-mail
             </label>
             <br>
             <label for='password'>
-              <input type='password' name='password' />
+              <input type='password' name='password' id='password' />
               Password
             </label>
           </fieldset>
@@ -51,17 +51,18 @@
     <!-- endbuild -->
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
-    <script>
+    <!-- <script>
       (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
       function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
       e=o.createElement(i);r=o.getElementsByTagName(i)[0];
       e.src='//www.google-analytics.com/analytics.js';
       r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
       ga('create','UA-XXXXX-X');ga('send','pageview');
-    </script>
+    </script> -->
 
         <!-- build:js({app,.tmp}) scripts/main.js -->
         <script src="scripts/main.js"></script>
+        <script src="scripts/user.js"></script>
         <!-- endbuild -->
 </body>
 </html>

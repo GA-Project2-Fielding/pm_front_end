@@ -12,5 +12,17 @@ var PM = (function (module) {
     fileLocations: host + 'file_locations/'
   };
 
+//   module.getTasks = function() {
+//   $.ajax({
+//     url: module.apiRoutes.tasks,
+//     type: 'GET'
+//   }).done(function(data) {
+//     var template = Handlebars.compile($('#movies-template').html());
+//     $('#movies').html(template(data));
+//   }).fail(function(jqXHR, textStatus, errorThrown) {
+//     console.log(jqXHR, textStatus, errorThrown);
+//   });
+// };
+
   return module;
 })(PM || {});
