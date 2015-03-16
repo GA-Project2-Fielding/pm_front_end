@@ -15,6 +15,7 @@ var PM = (function (module) {
 
   module.runLogin = function(){
     $('#loginForm').on('submit', module.submitLogin);
+    $('#registrationFrom').on('submit', module.submitRegistration);
   };
 
 
