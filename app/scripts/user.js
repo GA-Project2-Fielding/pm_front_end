@@ -1,7 +1,7 @@
 'use strict';
 console.log('user loaded');
 
-var PM = (function (module) {
+var PM = (function () {
   var authToken, host = 'http://localhost:3000/';
   var apiRoutes = {
       users: host + 'users/',
@@ -11,22 +11,22 @@ var PM = (function (module) {
       fileLocations: host + 'file_locations/'
   };
 
-  module.runLogin = function(){
+  var runLogin = function(){
     authToken = localStorage.getItem('authToken');
 
-    module.setupAjaxRequests();
+    setupAjaxRequests();
 
-    $('#loginForm').on('submit', module.submitLogin);
+    $('#loginForm').on('submit', submitLogin);
   };
 
-  module.setupAjaxRequests = function() {
+  var setupAjaxRequests = function() {
     $.ajaxPrefilter(function( options ) {
       options.headers = {};
       options.headers['AUTHORIZATION'] = 'Token token=' + authToken;
     });
   };
 
-  module.submitLogin = function(event) {
+  var submitLogin = function(event) {
     var $form;
     event.preventDefault();
     $form = $(this);
@@ -35,18 +35,26 @@ var PM = (function (module) {
       type: 'POST',
       data: $form.serialize()
     })
-    .done(module.loginSuccess)
-    .fail(function(err) {
+    .done(loginSuccess)
+    .fail(function(err){
       console.log(err);
     });
 
     return false;
   };
 
-  module.loginSuccess = function(userData) {
+  var loginSuccess = function(userData) {
     localStorage.setItem('authToken', userData.token);
+    localStorage.setItem('currentUser', userData.id);
     console.log('logged in!');
     window.location.href = '/index.html';
+  };
+
+  var acceptFailure = function(error) {
+    if (error.status === 401) {
+      console.log('SEND TO LOGIN SCREEN');
+      window.location.href = '/';
+    }
   };
 
   var Router = Backbone.Router.extend({
@@ -54,10 +62,10 @@ var PM = (function (module) {
       '': 'home'
   },
   home: function(){
-    var id = 20; // temp for testing
+    var currentUser = localStorage.getItem('currentUser');
 
     $.ajax({
-      url: apiRoutes.users + id
+      url: apiRoutes.users + currentUser
     }).done(function(data){
       console.log(data);
     }).fail();
@@ -67,9 +75,9 @@ var PM = (function (module) {
   new Router();
   Backbone.history.start();
 
-  return module;
-})(PM || {});
+  return runLogin;
+})();
 
-$(function() {
+$(document).ready(function() {
   PM.runLogin();
 });
