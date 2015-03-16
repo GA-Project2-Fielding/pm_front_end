@@ -22,10 +22,22 @@
 
 
     <div class="hero-unit">
-      <h1>Project Manage this!</h1>
+      <h3>Sign In</h3>
+        <form id='loginForm'>
+          <fieldset>
+            <label for='email'>
+              <input type='text' name='email' autofocus='true' />
+              User e-mail
+            </label>
+            <br>
+            <label for='password'>
+              <input type='password' name='password' />
+              Password
+            </label>
+          </fieldset>
 
-
-      </ul>
+          <button type='submit'>Sign In</button>
+        </form>
     </div>
 
 
@@ -50,7 +62,6 @@
 
         <!-- build:js({app,.tmp}) scripts/main.js -->
         <script src="scripts/main.js"></script>
-        <script src="scripts/user.js"></script>
         <!-- endbuild -->
 </body>
 </html>
