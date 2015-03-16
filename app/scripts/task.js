@@ -57,19 +57,26 @@ var PM = (function (module) {
     });
   };
 
-  module.getSubtasks = function(id) {
+  module.createSubtask = function(event, id) {
+    event.preventDefault();
     $.ajax({
       url: module.apiRoutes + id + '/subtasks',
       type: 'GET',
-      headers: { 'AUTHORIZATION': 'Token token=' + module.authToken }
+      headers: { 'AUTHORIZATION': 'Token token=' + module.authToken },
+      data: { task: {
+        due_date: $('input#').val(),
+        completed: $('input#').val(),
+        priority: $('input#').val(),
+        title: $('input#').val(),
+        description: $('input#').val()
+        }
+      }
     }).done(function(data) {
       console.log(data);
-    }).fail(function(jqXHR, textStatus, errorThrown) {
-      console.log(jqXHR, textStatus, errorThrown);
+    }).fail(function(data) {
+      console.log(data);
     });
   };
-
-  module.get
 
   return module;
 })(PM || {});
