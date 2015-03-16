@@ -3,8 +3,7 @@
   <h3>{{user.first_name}} {{user.last_name}}</h3>
   <ul>
     {{#each user.projects}}
-      <li>{{project_title}}</li>
-      <a href="/#/projects/{{id}}">Tasks</a>
+      <li><a href="/#/projects/{{id}}">{{project_title}}</a></li>
     {{/each}}
   </ul>
 </div>

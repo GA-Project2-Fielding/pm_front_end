@@ -25,14 +25,13 @@ var PM = (function (module) {
     });
   };
 
-  module.getProject = function(){
-    // should really get id from link clicked
-    var testId = 1;
+  module.getProject = function(project_id){
     $.ajax({
-      url: apiRoutes.projects + testId,
+      url: apiRoutes.projects + project_id,
       headers: { 'AUTHORIZATION': 'Token token=' + authToken },
     }).done(function(data){
-      console.log(data);
+      var template = Handlebars.templates['projectshowTemplate'];
+        $('#container').html(template({project: data}));
     }).fail(function(jqXHR, textStatus, errorThrown){
       console.log(jqXHR, textStatus, errorThrown);
     });
@@ -75,8 +74,6 @@ var PM = (function (module) {
   return module;
 })(PM || {});
 
-PM.getProjects();
-PM.getProject();
 
 // user_projects GET    /users/:user_id/projects(.:format)       projects#index {:format=>:json}
 //               POST   /users/:user_id/projects(.:format)       projects#create {:format=>:json}

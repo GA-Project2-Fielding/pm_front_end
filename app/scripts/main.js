@@ -1,28 +1,18 @@
 'use strict';
 console.log('main loaded');
 
-var PM = (function (module) {
-  module.init = function() {
 
-    var Router = Backbone.Router.extend({
+var Router = Backbone.Router.extend({
     routes: {
         '': 'home',
+        'home': 'home',
         'projects/:id': 'getProject'
     },
-      home: PM.renderUser()
-    });
-
-    new Router();
-    Backbone.history.start()
-  };
-
-  return module;
-})(PM || {});
-
-
-
-
-
-$(document).ready(function() {
-  PM.init();
+    home: PM.renderUser(),
+    getProject: function(id){
+        PM.getProject(id);
+    }
 });
+
+new Router();
+Backbone.history.start();

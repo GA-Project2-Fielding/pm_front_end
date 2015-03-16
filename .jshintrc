@@ -17,9 +17,10 @@
   "trailing": true,
   "smarttabs": true,
   "globals": {
-    "$": true,
-    "jQuery": true,
-    "Backbone": true,
-    "Handlebars": true
+    "$": false,
+    "jQuery": false,
+    "Backbone": false,
+    "Handlebars": false,
+    "PM": true
   }
 }
