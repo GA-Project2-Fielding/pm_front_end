@@ -75,12 +75,6 @@ var PM = (function (module) {
     }).done(function(data){
         var template = Handlebars.templates['homeTemplate'];
         $('#container').html(template({user: data}));
-        console.log(data);
-    }).fail(function(errors){
-        console.log(errors);
-    });
-  };
-
 
   return module;
 })(PM || {});
