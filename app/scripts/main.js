@@ -5,6 +5,7 @@ console.log('main loaded');
 var Router = Backbone.Router.extend({
     routes: {
         '': 'home',
+        'home': 'home',
         'projects/:id': 'getProject'
     },
     home: PM.renderUser(),
