@@ -1,0 +1,10 @@
+<div id='user'>
+  <h1>{{user.user_name}}</h1>
+  <h3>{{user.first_name}} {{user.last_name}}</h3>
+  <ul>
+    {{#each user.projects}}
+      <li>{{project_title}}</li>
+      <a href="/#/projects/{{id}}">Tasks</a>
+    {{/each}}
+  </ul>
+</div>
