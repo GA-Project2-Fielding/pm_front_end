@@ -73,7 +73,7 @@ var PM = (function (module) {
         type: 'GET',
         headers: { 'AUTHORIZATION': 'Token token=' + authToken },
     }).done(function(data){
-        var template = Handlebars.compile($('#homeTemplate').html());
+        var template = Handlebars.templates['homeTemplate'];
         $('#container').html(template({user: data}));
         console.log(data);
     }).fail(function(errors){
@@ -81,17 +81,12 @@ var PM = (function (module) {
     });
   };
 
-  var Router = Backbone.Router.extend({
-    routes: {
-        '': 'home'
-    },
-    home: module.renderUser()
-  });
-
-  new Router();
-  Backbone.history.start();
 
   return module;
 })(PM || {});
 
-PM.runLogin();
+
+$(document).ready(function() {
+  PM.runLogin();
+});
+
