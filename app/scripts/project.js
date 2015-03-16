@@ -75,8 +75,11 @@ var PM = (function (module) {
   return module;
 })(PM || {});
 
-PM.getProjects();
-PM.getProject();
+
+$(document).ready(function() {
+  PM.clickHandlers();
+});
+
 
 // user_projects GET    /users/:user_id/projects(.:format)       projects#index {:format=>:json}
 //               POST   /users/:user_id/projects(.:format)       projects#create {:format=>:json}

@@ -2,7 +2,8 @@
 console.log('task loaded');
 
 var PM = (function (module) {
-  var host = 'http://localhost:3000/';
+  var host = 'http://localhost:3000/',
+  authToken = localStorage.getItem('authToken');
 
   module.apiRoutes = {
     users: host + 'users/',
@@ -16,7 +17,7 @@ var PM = (function (module) {
     $.ajax({
       url: module.apiRoutes.projects,
       type: 'GET',
-      headers: { 'AUTHORIZATION': 'Token token=' + module.authToken }
+      headers: { 'AUTHORIZATION': 'Token token=' + authToken }
     }).done(function(data) {
       console.log(data);
     }).fail(function(jqXHR, textStatus, errorThrown) {
@@ -28,7 +29,7 @@ var PM = (function (module) {
     $.ajax({
       url: module.apiRoutes.tasks + id,
       type: 'GET',
-      headers: { 'AUTHORIZATION': 'Token token=' + module.authToken }
+      headers: { 'AUTHORIZATION': 'Token token=' + authToken }
     }).done(function(data) {
        console.log(data);
     }).fail(function(jqXHR, textStatus, errorThrown) {
@@ -41,7 +42,7 @@ var PM = (function (module) {
     $.ajax({
       url: module.apiRoutes.projects + id + '/tasks',
       type: 'POST',
-      headers: { 'AUTHORIZATION': 'Token token=' + module.authToken },
+      headers: { 'AUTHORIZATION': 'Token token=' + authToken },
       data: { task: {
         due_date: $('input#').val(),
         completed: $('input#').val(),
@@ -62,6 +63,7 @@ var PM = (function (module) {
     $.ajax({
       url: module.apiRoutes + id + '/subtasks',
       type: 'GET',
+<<<<<<< HEAD
       headers: { 'AUTHORIZATION': 'Token token=' + module.authToken },
       data: { task: {
         due_date: $('input#').val(),
@@ -71,6 +73,9 @@ var PM = (function (module) {
         description: $('input#').val()
         }
       }
+=======
+      headers: { 'AUTHORIZATION': 'Token token=' + authToken }
+>>>>>>> working on getting backbone routes working
     }).done(function(data) {
       console.log(data);
     }).fail(function(data) {
@@ -78,7 +83,13 @@ var PM = (function (module) {
     });
   };
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> working on getting backbone routes working
   return module;
 })(PM || {});
 
-PM.getTasks();
+$(document).ready(function() {
+});
+
