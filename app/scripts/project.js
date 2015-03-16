@@ -11,8 +11,7 @@ var PM = (function (module) {
       tasks: host + 'tasks/',
       comments: host + 'comments/',
       fileLocations: host + 'file_locations/'
-  },
-  $form = $('#newProjectForm');
+  };
 
   // this may not be needed as the user json already contains that user's projects
   module.getProjects = function(){
@@ -58,15 +57,12 @@ var PM = (function (module) {
 
   };
 
-  module.clickHandlers = function(){
-    $form.on('submit', module.submitProject);
-  };
+  $('#newProjectForm').on('submit', module.submitProject);
 
   return module;
 })(PM || {});
 
 PM.getProjects();
-PM.clickHandlers();
 
 // user_projects GET    /users/:user_id/projects(.:format)       projects#index {:format=>:json}
 //               POST   /users/:user_id/projects(.:format)       projects#create {:format=>:json}
