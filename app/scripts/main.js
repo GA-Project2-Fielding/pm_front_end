@@ -1,19 +1,20 @@
 'use strict';
 console.log('main loaded');
 
-// var PM = (function (module) {
-//   var host = 'http://localhost:3000/';
+var PM = (function (module) {
+  var host = 'http://localhost:3000/';
+  module.authToken = localStorage.getItem('authToken');
 
-//   module.apiRoutes = {
-//     users: host + 'users/',
-//     projects: host + 'projects/',
-//     tasks: host + 'tasks/',
-//     comments: host + 'comments/',
-//     fileLocations: host + 'file_locations/'
-//   };
+  module.apiRoutes = {
+    users: host + 'users/',
+    projects: host + 'projects/',
+    tasks: host + 'tasks/',
+    comments: host + 'comments/',
+    fileLocations: host + 'file_locations/'
+  };
 
-//   return module;
-// })(PM || {});
+  return module;
+})(PM || {});
 
 
 
