@@ -73,6 +73,8 @@ var PM = (function (module) {
         type: 'GET',
         headers: { 'AUTHORIZATION': 'Token token=' + authToken },
     }).done(function(data){
+        var template = Handlebars.compile($('#homeTemplate').html());
+        $('#container').html(template({user: data}));
         console.log(data);
     }).fail(function(errors){
         console.log(errors);
