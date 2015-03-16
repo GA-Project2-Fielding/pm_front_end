@@ -45,6 +45,7 @@ var PM = (function (module) {
 
   module.loginSuccess = function(userData) {
     localStorage.setItem('authToken', userData.token);
+    localStorage.setItem('currentUser', userData.id);
     console.log('logged in!');
     window.location.href = '/index.html';
   };
@@ -61,10 +62,10 @@ var PM = (function (module) {
       '': 'home'
   },
   home: function(){
-    var id = 1; // temp for testing
+    var currentUser = localStorage.getItem('currentUser');
 
     $.ajax({
-      url: apiRoutes.users + id
+      url: apiRoutes.users + currentUser
     }).done(function(data){
       console.log(data);
     }).fail(function(errors){
