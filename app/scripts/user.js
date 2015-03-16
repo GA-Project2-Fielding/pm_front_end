@@ -31,8 +31,8 @@ var PM = (function (module) {
             }}
     })
     .done(module.loginSuccess)
-    .fail(function() {
-      console.log('error');
+    .fail(function(errors){
+      console.log(errors);
     });
 
   };
@@ -47,9 +47,7 @@ var PM = (function (module) {
       data: $form.serialize()
     })
     .done(module.loginSuccess)
-    .fail(function(err){
-      console.log(err);
-    });
+    .fail(module.acceptFailure);
 
     return false;
   };
@@ -63,8 +61,8 @@ var PM = (function (module) {
 
   module.acceptFailure = function(error) {
     if (error.status === 401) {
-      console.log('SEND TO LOGIN SCREEN');
-      window.location.href = '/';
+      console.log('SEND TO landing SCREEN');
+      window.location.href = '/landing.html';
     }
   };
 
