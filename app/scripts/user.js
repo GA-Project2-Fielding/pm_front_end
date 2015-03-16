@@ -2,7 +2,9 @@
 console.log('user loaded');
 
 var PM = (function (module) {
-  var /* authToken, */ host = 'http://localhost:3000/';
+  var host = 'http://localhost:3000/';
+  var authToken = localStorage.getItem('authToken');
+
   var apiRoutes = {
       users: host + 'users/',
       projects: host + 'projects/',
@@ -12,19 +14,9 @@ var PM = (function (module) {
   };
 
   module.runLogin = function(){
-    module.authToken = localStorage.getItem('authToken');
-
-    module.setupAjaxRequests();
-
     $('#loginForm').on('submit', module.submitLogin);
   };
 
-  module.setupAjaxRequests = function() {
-    $.ajaxPrefilter(function( options ) {
-      options.headers = {};
-      options.headers['AUTHORIZATION'] = 'Token token=' + module.authToken;
-    });
-  };
 
   module.submitLogin = function(event) {
     var $form;
@@ -59,19 +51,20 @@ var PM = (function (module) {
 
   var Router = Backbone.Router.extend({
     routes: {
-      '': 'home'
-  },
-  home: function(){
-    var currentUser = localStorage.getItem('currentUser');
-
-    $.ajax({
-      url: apiRoutes.users + currentUser
-    }).done(function(data){
-      console.log(data);
-    }).fail(function(errors){
-      console.log(errors);
-    });
-  }
+        '': 'home'
+    },
+    home: function(){
+      var currentUser = localStorage.getItem('currentUser');
+      $.ajax({
+        url: apiRoutes.users + currentUser,
+        type: 'GET',
+        headers: { 'AUTHORIZATION': 'Token token=' + authToken },
+      }).done(function(data){
+        console.log(data);
+      }).fail(function(errors){
+        console.log(errors);
+      });
+    }
   });
 
   new Router();
@@ -80,6 +73,4 @@ var PM = (function (module) {
   return module;
 })(PM || {});
 
-$(function() {
-  PM.runLogin();
-});
+PM.runLogin();
