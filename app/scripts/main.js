@@ -25,5 +25,4 @@ var PM = (function (module) {
 
 $(document).ready(function() {
   PM.init();
-
 });
