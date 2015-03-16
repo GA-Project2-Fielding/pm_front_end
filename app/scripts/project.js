@@ -30,7 +30,8 @@ var PM = (function (module) {
       url: apiRoutes.projects + project_id,
       headers: { 'AUTHORIZATION': 'Token token=' + authToken },
     }).done(function(data){
-      console.log(data);
+      var template = Handlebars.templates['projectshowTemplate'];
+        $('#container').html(template({project: data}));
     }).fail(function(jqXHR, textStatus, errorThrown){
       console.log(jqXHR, textStatus, errorThrown);
     });
