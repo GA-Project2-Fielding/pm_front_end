@@ -34,7 +34,6 @@ var PM = (function (module) {
     .fail(function(errors){
       console.log(errors);
     });
-
   };
 
   module.submitLogin = function(event) {
@@ -56,7 +55,7 @@ var PM = (function (module) {
     localStorage.setItem('authToken', userData.token);
     localStorage.setItem('currentUser', userData.id);
     console.log('logged in!');
-    window.location.href = '/index.html';
+    window.location.href = '/#/home';
   };
 
   module.acceptFailure = function(error) {
@@ -66,22 +65,25 @@ var PM = (function (module) {
     }
   };
 
+  module.renderUser = function(){
+    var currentUser = localStorage.getItem('currentUser');
+
+    $.ajax({
+        url: apiRoutes.users + currentUser,
+        type: 'GET',
+        headers: { 'AUTHORIZATION': 'Token token=' + authToken },
+    }).done(function(data){
+        console.log(data);
+    }).fail(function(errors){
+        console.log(errors);
+    });
+  };
+
   var Router = Backbone.Router.extend({
     routes: {
         '': 'home'
     },
-    home: function(){
-      var currentUser = localStorage.getItem('currentUser');
-    //   $.ajax({
-    //     url: apiRoutes.users + currentUser,
-    //     type: 'GET',
-    //     headers: { 'AUTHORIZATION': 'Token token=' + authToken },
-    //   }).done(function(data){
-    //     console.log(data);
-    //   }).fail(function(errors){
-    //     console.log(errors);
-    //   });
-    }
+    home: module.renderUser()
   });
 
   new Router();
