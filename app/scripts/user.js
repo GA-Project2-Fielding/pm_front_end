@@ -31,10 +31,9 @@ var PM = (function (module) {
             }}
     })
     .done(module.loginSuccess)
-    .fail(function() {
-      console.log('error');
+    .fail(function(errors){
+      console.log(errors);
     });
-
   };
 
   module.submitLogin = function(event) {
@@ -47,9 +46,7 @@ var PM = (function (module) {
       data: $form.serialize()
     })
     .done(module.loginSuccess)
-    .fail(function(err){
-      console.log(err);
-    });
+    .fail(module.acceptFailure);
 
     return false;
   };
@@ -58,38 +55,34 @@ var PM = (function (module) {
     localStorage.setItem('authToken', userData.token);
     localStorage.setItem('currentUser', userData.id);
     console.log('logged in!');
-    window.location.href = '/index.html';
+    window.location.href = '/#/home';
   };
 
   module.acceptFailure = function(error) {
     if (error.status === 401) {
-      console.log('SEND TO LOGIN SCREEN');
-      window.location.href = '/';
+      console.log('SEND TO landing SCREEN');
+      window.location.href = '/landing.html';
     }
   };
 
-  var Router = Backbone.Router.extend({
-    routes: {
-        '': 'home'
-    },
-    home: function(){
-      var currentUser = localStorage.getItem('currentUser');
-    //   $.ajax({
-    //     url: apiRoutes.users + currentUser,
-    //     type: 'GET',
-    //     headers: { 'AUTHORIZATION': 'Token token=' + authToken },
-    //   }).done(function(data){
-    //     console.log(data);
-    //   }).fail(function(errors){
-    //     console.log(errors);
-    //   });
-    }
-  });
+  module.renderUser = function(){
+    var currentUser = localStorage.getItem('currentUser');
 
-  new Router();
-  Backbone.history.start();
+    $.ajax({
+        url: apiRoutes.users + currentUser,
+        type: 'GET',
+        headers: { 'AUTHORIZATION': 'Token token=' + authToken },
+    }).done(function(data){
+        var template = Handlebars.templates['homeTemplate'];
+        $('#container').html(template({user: data}));
+    });
+  };
 
   return module;
 })(PM || {});
 
-PM.runLogin();
+
+$(document).ready(function() {
+  PM.runLogin();
+});
+
