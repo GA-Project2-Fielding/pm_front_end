@@ -15,8 +15,27 @@ var PM = (function (module) {
 
   module.runLogin = function(){
     $('#loginForm').on('submit', module.submitLogin);
+    $('#registrationForm').on('submit', module.submitRegistration);
   };
 
+  module.submitRegistration = function(event){
+    event.preventDefault();
+    $.ajax({
+      url: apiRoutes.users,
+      type: 'POST',
+      data: {user: { email: $('#email-reg').val(),
+              user_name: $('#user-name').val(),
+              first_name: $('#first-name').val(),
+              last_name: $('#last-name').val(),
+              password: $('#password-reg').val()
+            }}
+    })
+    .done(module.loginSuccess)
+    .fail(function() {
+      console.log('error');
+    });
+
+  };
 
   module.submitLogin = function(event) {
     var $form;
@@ -55,15 +74,15 @@ var PM = (function (module) {
     },
     home: function(){
       var currentUser = localStorage.getItem('currentUser');
-      $.ajax({
-        url: apiRoutes.users + currentUser,
-        type: 'GET',
-        headers: { 'AUTHORIZATION': 'Token token=' + authToken },
-      }).done(function(data){
-        console.log(data);
-      }).fail(function(errors){
-        console.log(errors);
-      });
+    //   $.ajax({
+    //     url: apiRoutes.users + currentUser,
+    //     type: 'GET',
+    //     headers: { 'AUTHORIZATION': 'Token token=' + authToken },
+    //   }).done(function(data){
+    //     console.log(data);
+    //   }).fail(function(errors){
+    //     console.log(errors);
+    //   });
     }
   });
 
