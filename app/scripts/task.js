@@ -63,8 +63,7 @@ var PM = (function (module) {
     $.ajax({
       url: module.apiRoutes + id + '/subtasks',
       type: 'GET',
-<<<<<<< HEAD
-      headers: { 'AUTHORIZATION': 'Token token=' + module.authToken },
+      headers: { 'AUTHORIZATION': 'Token token=' + authToken },
       data: { task: {
         due_date: $('input#').val(),
         completed: $('input#').val(),
@@ -73,20 +72,12 @@ var PM = (function (module) {
         description: $('input#').val()
         }
       }
-=======
-      headers: { 'AUTHORIZATION': 'Token token=' + authToken }
->>>>>>> working on getting backbone routes working
     }).done(function(data) {
       console.log(data);
     }).fail(function(data) {
       console.log(data);
     });
   };
-
-<<<<<<< HEAD
-=======
-
->>>>>>> working on getting backbone routes working
   return module;
 })(PM || {});
 

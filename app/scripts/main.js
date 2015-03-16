@@ -9,7 +9,7 @@ var Router = Backbone.Router.extend({
     },
     home: PM.renderUser(),
     getProject: function(id){
-        PM.getOneProject(id);
+        PM.getProject(id);
     }
 });
 

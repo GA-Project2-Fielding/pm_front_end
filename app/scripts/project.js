@@ -25,11 +25,9 @@ var PM = (function (module) {
     });
   };
 
-  module.getProject = function(){
-    // should really get id from link clicked
-    var testId = 1;
+  module.getProject = function(project_id){
     $.ajax({
-      url: apiRoutes.projects + testId,
+      url: apiRoutes.projects + project_id,
       headers: { 'AUTHORIZATION': 'Token token=' + authToken },
     }).done(function(data){
       console.log(data);
@@ -74,11 +72,6 @@ var PM = (function (module) {
 
   return module;
 })(PM || {});
-
-
-$(document).ready(function() {
-  PM.clickHandlers();
-});
 
 
 // user_projects GET    /users/:user_id/projects(.:format)       projects#index {:format=>:json}
