@@ -57,6 +57,20 @@ var PM = (function (module) {
     });
   };
 
+  module.getSubtasks = function(id) {
+    $.ajax({
+      url: module.apiRoutes + id + '/subtasks',
+      type: 'GET',
+      headers: { 'AUTHORIZATION': 'Token token=' + module.authToken }
+    }).done(function(data) {
+      console.log(data);
+    }).fail(function(jqXHR, textStatus, errorThrown) {
+      console.log(jqXHR, textStatus, errorThrown);
+    });
+  };
+
+  module.get
+
   return module;
 })(PM || {});
 
