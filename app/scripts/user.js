@@ -75,6 +75,8 @@ var PM = (function (module) {
     }).done(function(data){
         var template = Handlebars.templates['homeTemplate'];
         $('#container').html(template({user: data}));
+    });
+  };
 
   return module;
 })(PM || {});

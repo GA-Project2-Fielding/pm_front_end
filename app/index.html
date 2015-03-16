@@ -50,5 +50,19 @@
         <script src="scripts/user.js"></script>
         <script src="scripts/templates/templates.js"></script>
         <!-- endbuild -->
+
+
+    <script type="text/x-handlebars-template" id="homeTemplate">
+      <div id='user'>
+        <h1>{{user.user_name}}</h1>
+        <h3>{{user.first_name}} {{user.last_name}}</h3>
+        <ul>
+          {{#each user.projects}}
+            <li>{{project_title}}</li>
+            <a href="">Tasks</a>
+          {{/each}}
+        </ul>
+      </div>
+    </script>
 </body>
 </html>
