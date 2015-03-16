@@ -22,7 +22,7 @@ var PM = (function (module) {
 
 $(document).ready(function() {
   $.getScript('scripts/user.js');
-  // $.getScript('scripts/project.js');
+  $.getScript('scripts/project.js');
   // $.getScript('scripts/task.js');
   // $.getScript('scripts/comment.js');
   // $.getScript('scripts/fileLocation.js');
