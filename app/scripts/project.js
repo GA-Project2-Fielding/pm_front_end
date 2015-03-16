@@ -11,13 +11,25 @@ var PM = (function (module) {
       tasks: host + 'tasks/',
       comments: host + 'comments/',
       fileLocations: host + 'file_locations/'
-  },
-  $form = $('#newProjectForm');
+  };
 
   // this may not be needed as the user json already contains that user's projects
   module.getProjects = function(){
     $.ajax({
       url: apiRoutes.users + currentUser + '/projects',
+      headers: { 'AUTHORIZATION': 'Token token=' + authToken },
+    }).done(function(data){
+      console.log(data);
+    }).fail(function(jqXHR, textStatus, errorThrown){
+      console.log(jqXHR, textStatus, errorThrown);
+    });
+  };
+
+  module.getProject = function(){
+    // should really get id from link clicked
+    var testId = 1;
+    $.ajax({
+      url: apiRoutes.projects + testId,
       headers: { 'AUTHORIZATION': 'Token token=' + authToken },
     }).done(function(data){
       console.log(data);
@@ -41,8 +53,8 @@ var PM = (function (module) {
           start_date: $('#startDate').val(),
           due_date: $('#dueDate').val(),
           completion_date: $('#completionDate').val(),
-          completed: $('#completed').val(),
-          visible: $('#visible').val()
+          completed: $('#completed').is(':checked'),
+          visible: $('#visible').is(':checked')
         }
       }
     })
@@ -58,15 +70,13 @@ var PM = (function (module) {
 
   };
 
-  module.clickHandlers = function(){
-    $form.on('submit', module.submitProject);
-  };
+  $('#newProjectForm').on('submit', module.submitProject);
 
   return module;
 })(PM || {});
 
 PM.getProjects();
-PM.clickHandlers();
+PM.getProject();
 
 // user_projects GET    /users/:user_id/projects(.:format)       projects#index {:format=>:json}
 //               POST   /users/:user_id/projects(.:format)       projects#create {:format=>:json}
