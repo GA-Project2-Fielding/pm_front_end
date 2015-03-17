@@ -31,10 +31,22 @@ var PM = (function (module) {
       type: 'GET',
       headers: { 'AUTHORIZATION': 'Token token=' + authToken }
     }).done(function(data) {
-       console.log(data);
+      var supercomments = module.getSupercomments(data);
+      var template = Handlebars.templates['taskShowTemplate'];
+      $('#container').html(template({task: data, comments: supercomments}));
     }).fail(function(jqXHR, textStatus, errorThrown) {
       console.log(jqXHR, textStatus, errorThrown);
     });
+  };
+
+  module.getSupercomments = function(data){
+    var supercomments = [];
+    for(var i=0; i<data.comments.length; i++){
+      if (data.comments[i].supercomment_id === null){
+        supercomments.push(data.comments[i]);
+      }
+    }
+    return supercomments;
   };
 
   module.createTask = function(event, project_id) {
@@ -65,6 +77,7 @@ var PM = (function (module) {
         $('#taskDueDate').val('#taskDueDate');
         $('#taskCompleted').is(':checked');
         $('#taskPriority').val('#taskPriority');
+    };
   };
 
   module.patchTask = function(event, id) {
