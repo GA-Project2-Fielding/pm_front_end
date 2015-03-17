@@ -3,6 +3,7 @@ console.log('comment loaded');
 
 var PM = (function (module) {
   var host = 'http://localhost:3000/';
+  var authToken = localStorage.getItem('authToken');
 
   module.apiRoutes = {
     users: host + 'users/',
@@ -10,6 +11,21 @@ var PM = (function (module) {
     tasks: host + 'tasks/',
     comments: host + 'comments/',
     fileLocations: host + 'file_locations/'
+  };
+
+  module.getComment = function(id){
+    $.ajax({
+      url: module.apiRoutes.comments + id,
+      headers: { 'AUTHORIZATION': 'Token token=' + authToken }
+    })
+    .done(function(data) {
+      var template = Handlebars.templates['commentShowTemplate'];
+      $('#container').html(template({comment: data}));
+    })
+    .fail(function() {
+      console.log('error');
+    });
+
   };
 
   return module;

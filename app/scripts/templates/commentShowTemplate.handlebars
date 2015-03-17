@@ -1,0 +1,11 @@
+<div id='comment'>
+  <h1>{{comment.body}}</h1>
+  <h3>{{comment.user.user_name}}</h3>
+  <h6>{{comment.created_at}}</h6>
+  <ul>
+    <h4>Subcomments:</h4>
+    {{#each comment.subcomments}}
+      <li><a href="/#/comments/{{id}}">{{body}}</a></li>
+    {{/each}}
+  </ul>
+</div>
