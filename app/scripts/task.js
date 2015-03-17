@@ -33,6 +33,7 @@ var PM = (function (module) {
       headers: { 'AUTHORIZATION': 'Token token=' + authToken }
     }).done(function(data) {
       var supercomments = module.getSupercomments(data);
+      Handlebars.partials = Handlebars.templates;
       var template = Handlebars.templates['taskShowTemplate'];
       $('#container').html(template({task: data, comments: supercomments}));
     }).fail(function(jqXHR, textStatus, errorThrown) {

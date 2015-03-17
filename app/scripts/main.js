@@ -27,6 +27,7 @@ var setClickHandlers = function(){
   $('#container').on('submit', '#newProjectForm', PM.submitProject);
   $('#container').on('click', '#new-task-button', PM.showForm);
   $('#container').on('submit', '#newTaskForm', PM.createTask);
+  $('#container').on('click', '#new-subtask-button', PM.showForm);
 };
 
 new Router();

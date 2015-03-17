@@ -31,6 +31,7 @@ var PM = (function (module) {
       headers: { 'AUTHORIZATION': 'Token token=' + authToken },
     }).done(function(data){
       var supertasks = module.getSupertasks(data);
+      Handlebars.partials = Handlebars.templates;
       var template = Handlebars.templates['projectshowTemplate'];
       localStorage.setItem('projectId', data.id);
       $('#container').html(template({project: data, tasks: supertasks}));

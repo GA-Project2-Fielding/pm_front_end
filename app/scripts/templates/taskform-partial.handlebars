@@ -1,0 +1,38 @@
+<div class='form'>
+    <h3>New Task</h3>
+        <form id='newTaskForm'>
+          <fieldset>
+            <label for='taskTitle'>
+              <input type='text' name='taskTitle' id='taskTitle'autofocus='true' />
+              Title
+            </label>
+            <br>
+            <label for='taskDescription'>
+              <textarea id='taskDescription'></textarea>
+              Description
+            </label>
+            <br>
+            <label for='taskDueDate'>
+              <input type='date' name='taskDueDate' id='taskDueDate' />
+              Due Date
+            </label>
+            <br>
+            <label for='taskCompleted'>
+              <input type='checkbox' name='taskCompleted' id='taskCompleted' />
+              Completed?
+            </label>
+            <br>
+            <label for='taskPriority'>
+            <select id='taskPriority'>
+              <option value="1">Urgent</option>
+              <option value="2">High</option>
+              <option value="3">Medium</option>
+              <option value="4">Low</option>
+            </select>
+              Priority
+            </label>
+          </fieldset>
+
+          <button type='submit'>Submit</button>
+        </form>
+    </div>

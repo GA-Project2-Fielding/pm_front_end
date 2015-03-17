@@ -6,6 +6,8 @@
     {{#each task.subtasks}}
       <li><a href="/#/tasks/{{id}}">{{title}}</a></li>
     {{/each}}
+    <button id="new-subtask-button">New Subtask</button>
+    {{> taskform-partial}}
     <h4>Comments:</h4>
     {{#each comments}}
     <li><a href="/#/comments/{{id}}">{{body}}</a></li>
