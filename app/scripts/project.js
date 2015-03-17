@@ -30,11 +30,22 @@ var PM = (function (module) {
       url: apiRoutes.projects + project_id,
       headers: { 'AUTHORIZATION': 'Token token=' + authToken },
     }).done(function(data){
+      var supertasks = module.getSupertasks(data);
       var template = Handlebars.templates['projectshowTemplate'];
-        $('#container').html(template({project: data}));
+        $('#container').html(template({project: data, tasks: supertasks}));
     }).fail(function(jqXHR, textStatus, errorThrown){
       console.log(jqXHR, textStatus, errorThrown);
     });
+  };
+
+  module.getSupertasks = function(data){
+    var supertasks = [];
+    for(var i=0; i<data.tasks.length; i++){
+      if (data.tasks[i].supertask_id === null){
+        supertasks.push(data.tasks[i]);
+      }
+    }
+    return supertasks;
   };
 
   module.submitProject = function(event){
@@ -66,7 +77,6 @@ var PM = (function (module) {
     .always(function() {
       console.log('complete');
     });
-
   };
 
   $('#newProjectForm').on('submit', module.submitProject);
