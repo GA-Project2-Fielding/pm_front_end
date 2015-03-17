@@ -69,13 +69,10 @@ var PM = (function (module) {
       }
     })
     .done(function() {
-      console.log('success');
+      module.renderUser();
     })
     .fail(function() {
       console.log('error');
-    })
-    .always(function() {
-      console.log('complete');
     });
   };
 
