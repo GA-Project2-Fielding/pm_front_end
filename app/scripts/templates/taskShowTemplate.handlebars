@@ -1,0 +1,14 @@
+<div id='task'>
+  <h1>{{task.title}}</h1>
+  <h3>{{task.completed}}</h3>
+  <ul>
+    <h4>Subtasks:</h4>
+    {{#each task.subtasks}}
+      <li><a href="/#/tasks/{{id}}">{{title}}</a></li>
+    {{/each}}
+    <h4>Comments:</h4>
+    {{#each task.comments}}
+    <li>{{body}}</li>
+    {{/each}}
+  </ul>
+</div>

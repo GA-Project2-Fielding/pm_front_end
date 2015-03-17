@@ -31,7 +31,8 @@ var PM = (function (module) {
       type: 'GET',
       headers: { 'AUTHORIZATION': 'Token token=' + authToken }
     }).done(function(data) {
-       console.log(data);
+      var template = Handlebars.templates['taskShowTemplate'];
+      $('#container').html(template({task: data}));
     }).fail(function(jqXHR, textStatus, errorThrown) {
       console.log(jqXHR, textStatus, errorThrown);
     });
