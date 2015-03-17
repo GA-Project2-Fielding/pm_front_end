@@ -24,3 +24,8 @@ var Router = Backbone.Router.extend({
 
 new Router();
 Backbone.history.start();
+
+$(document).ready(function() {
+  $('#container').on('click', '#new-project-button', PM.showProjectForm);
+  $('#container').on('submit', '#newProjectForm', PM.submitProject);
+});
