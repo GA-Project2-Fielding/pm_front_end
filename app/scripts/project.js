@@ -32,7 +32,8 @@ var PM = (function (module) {
     }).done(function(data){
       var supertasks = module.getSupertasks(data);
       var template = Handlebars.templates['projectshowTemplate'];
-        $('#container').html(template({project: data, tasks: supertasks}));
+      localStorage.setItem('projectId', data.id);
+      $('#container').html(template({project: data, tasks: supertasks}));
     }).fail(function(jqXHR, textStatus, errorThrown){
       console.log(jqXHR, textStatus, errorThrown);
     });
@@ -76,7 +77,7 @@ var PM = (function (module) {
     });
   };
 
-  module.showProjectForm = function(){
+  module.showForm = function(){
     $('.form').toggle();
   };
 

@@ -4,6 +4,7 @@ console.log('task loaded');
 var PM = (function (module) {
   var host = 'http://localhost:3000/',
   authToken = localStorage.getItem('authToken');
+  var projectId = localStorage.getItem('projectId');
 
   module.apiRoutes = {
     users: host + 'users/',
@@ -49,10 +50,10 @@ var PM = (function (module) {
     return supercomments;
   };
 
-  module.createTask = function(event, project_id) {
+  module.createTask = function(event) {
     event.preventDefault();
     $.ajax({
-      url: module.apiRoutes.projects + project_id + '/tasks',
+      url: module.apiRoutes.projects + projectId + '/tasks',
       type: 'POST',
       headers: { 'AUTHORIZATION': 'Token token=' + authToken },
       data: { task: {
@@ -64,7 +65,7 @@ var PM = (function (module) {
         }
       }
     }).done(function(data) {
-      console.log(data);
+      window.location.href = '/#/tasks/'+ data.id;
     }).fail(function(jqXHR, textStatus, errorThrown) {
       console.log(jqXHR, textStatus, errorThrown);
     });

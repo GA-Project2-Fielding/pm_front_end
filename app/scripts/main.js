@@ -22,10 +22,16 @@ var Router = Backbone.Router.extend({
     }
 });
 
+var setClickHandlers = function(){
+  $('#container').on('click', '#new-project-button', PM.showForm);
+  $('#container').on('submit', '#newProjectForm', PM.submitProject);
+  $('#container').on('click', '#new-task-button', PM.showForm);
+  $('#container').on('submit', '#newTaskForm', PM.createTask);
+};
+
 new Router();
 Backbone.history.start();
 
 $(document).ready(function() {
-  $('#container').on('click', '#new-project-button', PM.showProjectForm);
-  $('#container').on('submit', '#newProjectForm', PM.submitProject);
+  setClickHandlers();
 });
