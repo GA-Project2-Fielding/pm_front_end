@@ -13,9 +13,9 @@ var PM = (function (module) {
     fileLocations: host + 'file_locations/'
   };
 
-  module.getTasks = function() {
+  module.getTasks = function(id) {
     $.ajax({
-      url: module.apiRoutes.projects,
+      url: module.apiRoutes.projects + id + '/tasks',
       type: 'GET',
       headers: { 'AUTHORIZATION': 'Token token=' + authToken }
     }).done(function(data) {
@@ -37,18 +37,18 @@ var PM = (function (module) {
     });
   };
 
-  module.createTask = function(event) {
+  module.createTask = function(event, id) {
     event.preventDefault();
     $.ajax({
       url: module.apiRoutes.projects + id + '/tasks',
       type: 'POST',
       headers: { 'AUTHORIZATION': 'Token token=' + authToken },
       data: { task: {
-        due_date: $('input#').val(),
-        completed: $('input#').val(),
-        priority: $('input#').val(),
-        title: $('input#').val(),
-        description: $('input#').val()
+        due_date: $('input#taskDueDate').val(),
+        completed: $('input#taskCompleted').val(),
+        priority: $('select#taskPriority').val(),
+        title: $('input#taskTitle').val(),
+        description: $('textarea#taskDescription').val()
         }
       }
     }).done(function(data) {
@@ -58,18 +58,39 @@ var PM = (function (module) {
     });
   };
 
+  module.updateTask = function() {
+    $('button#updateTask').on('click', )
+  }
+
+  module.patchTask = function(event, id) {
+    event.preventDefault();
+    $.ajax({
+      url: module.apiRoutes.tasks + id,
+      type: 'PATCH',
+      headers: { 'AUTHORIZATION': 'Token token=' + authToken },
+      data: { task: {
+        due_date: $('input#taskDueDate').val(),
+        completed: $('input#taskCompleted').val(),
+        priority: $('select#taskPriority').val(),
+        title: $('input#taskTitle').val(),
+        description: $('textarea#taskDescription').val()
+        }
+      }
+    }).done().fail();
+  };
+
   module.createSubtask = function(event, id) {
     event.preventDefault();
     $.ajax({
-      url: module.apiRoutes + id + '/subtasks',
+      url: module.apiRoutes.tasks + id + '/subtasks',
       type: 'GET',
       headers: { 'AUTHORIZATION': 'Token token=' + authToken },
       data: { task: {
-        due_date: $('input#').val(),
-        completed: $('input#').val(),
-        priority: $('input#').val(),
-        title: $('input#').val(),
-        description: $('input#').val()
+        due_date: $('input#taskDueDate').val(),
+        completed: $('input#taskCompleted').val(),
+        priority: $('select#taskPriority').val(),
+        title: $('input#taskTitle').val(),
+        description: $('textarea#taskDescription').val()
         }
       }
     }).done(function(data) {
@@ -78,6 +99,7 @@ var PM = (function (module) {
       console.log(data);
     });
   };
+
   return module;
 })(PM || {});
 
