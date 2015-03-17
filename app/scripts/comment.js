@@ -2,8 +2,8 @@
 console.log('comment loaded');
 
 var PM = (function (module) {
-  var host = 'http://localhost:3000/';
-  var authToken = localStorage.getItem('authToken');
+  var host = 'http://localhost:3000/',
+  authToken = localStorage.getItem('authToken');
 
   module.apiRoutes = {
     users: host + 'users/',
@@ -25,8 +25,25 @@ var PM = (function (module) {
     .fail(function() {
       console.log('error');
     });
+  };
 
+  module.getComments = function(taskId){
+    $.ajax({
+      url: module.apiRoutes.tasks + taskId + '/comments',
+      type: 'get',
+      dataType: 'json',
+      headers: { 'AUTHORIZATION': 'Token token=' + authToken }
+    })
+    .done(function(data) {
+      console.table(data);
+    })
+    .fail(function(jqXHR, textStatus, errorThrown) {
+      console.log(jqXHR, textStatus, errorThrown);
+    });
   };
 
   return module;
 })(PM || {});
+
+var testTaskId = 1;
+PM.getComments(testTaskId);
