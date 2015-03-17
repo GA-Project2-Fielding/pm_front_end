@@ -31,8 +31,10 @@ var PM = (function (module) {
       headers: { 'AUTHORIZATION': 'Token token=' + authToken },
     }).done(function(data){
       var supertasks = module.getSupertasks(data);
+      Handlebars.partials = Handlebars.templates;
       var template = Handlebars.templates['projectshowTemplate'];
-        $('#container').html(template({project: data, tasks: supertasks}));
+      localStorage.setItem('projectId', data.id);
+      $('#container').html(template({project: data, tasks: supertasks}));
     }).fail(function(jqXHR, textStatus, errorThrown){
       console.log(jqXHR, textStatus, errorThrown);
     });
@@ -69,17 +71,14 @@ var PM = (function (module) {
       }
     })
     .done(function() {
-      console.log('success');
+      module.renderUser();
     })
     .fail(function() {
       console.log('error');
-    })
-    .always(function() {
-      console.log('complete');
     });
   };
 
-  module.showProjectForm = function(){
+  module.showForm = function(){
     $('.form').toggle();
   };
 

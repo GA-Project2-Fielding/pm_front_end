@@ -1,6 +1,7 @@
 <div id='user'>
   <h1>{{user.user_name}}</h1>
   <h3>{{user.first_name}} {{user.last_name}}</h3>
+  <h5>Projects:</h5>
   <ul>
     {{#each user.projects}}
       <li><a href="/#/projects/{{id}}">{{project_title}}</a></li>
