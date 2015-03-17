@@ -5,6 +5,7 @@ var PM = (function (module) {
   var host = 'http://localhost:3000/',
   authToken = localStorage.getItem('authToken');
   var projectId = localStorage.getItem('projectId');
+  var taskId = localStorage.getItem('taskId');
 
   module.apiRoutes = {
     users: host + 'users/',
@@ -33,6 +34,7 @@ var PM = (function (module) {
       headers: { 'AUTHORIZATION': 'Token token=' + authToken }
     }).done(function(data) {
       var supercomments = module.getSupercomments(data);
+      localStorage.setItem('taskId', data.id);
       Handlebars.partials = Handlebars.templates;
       var template = Handlebars.templates['taskShowTemplate'];
       $('#container').html(template({task: data, comments: supercomments}));
@@ -117,11 +119,11 @@ var PM = (function (module) {
     });
   };
 
-  module.createSubtask = function(event, project_id) {
+  module.createSubtask = function(event) {
     event.preventDefault();
     $.ajax({
-      url: module.apiRoutes.tasks + project_id + '/subtasks',
-      type: 'GET',
+      url: module.apiRoutes.tasks + taskId + '/subtasks',
+      type: 'POST',
       headers: { 'AUTHORIZATION': 'Token token=' + authToken },
       data: { task: {
         due_date: $('input#taskDueDate').val(),
@@ -132,7 +134,7 @@ var PM = (function (module) {
         }
       }
     }).done(function(data) {
-      console.log(data);
+      window.location.href = '/#/tasks/'+ data.id;
     }).fail(function(data) {
       console.log(data);
     });
