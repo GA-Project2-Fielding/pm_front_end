@@ -79,7 +79,9 @@ var PM = (function (module) {
     });
   };
 
-  $('#newProjectForm').on('submit', module.submitProject);
+  module.showProjectForm = function(){
+    $('.form').toggle();
+  };
 
   return module;
 })(PM || {});
