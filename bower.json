@@ -5,5 +5,11 @@
     "jquery": "~1.11.1",
     "handlebars": "~3.0.0",
     "backbone": "~1.1.2"
+  },
+  "resolutions": {
+    "jquery": ">=2"
+  },
+  "devDependencies": {
+    "jasmine-jquery": "~2.1.0"
   }
 }

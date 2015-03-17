@@ -13,9 +13,9 @@ var PM = (function (module) {
     fileLocations: host + 'file_locations/'
   };
 
-  module.getTasks = function() {
+  module.getTasks = function(project_id) {
     $.ajax({
-      url: module.apiRoutes.projects,
+      url: module.apiRoutes.projects + project_id + '/tasks',
       type: 'GET',
       headers: { 'AUTHORIZATION': 'Token token=' + authToken }
     }).done(function(data) {
@@ -49,18 +49,18 @@ var PM = (function (module) {
     return supercomments;
   };
 
-  module.createTask = function(event) {
+  module.createTask = function(event, project_id) {
     event.preventDefault();
     $.ajax({
-      url: module.apiRoutes.projects + id + '/tasks',
+      url: module.apiRoutes.projects + project_id + '/tasks',
       type: 'POST',
       headers: { 'AUTHORIZATION': 'Token token=' + authToken },
       data: { task: {
-        due_date: $('input#').val(),
-        completed: $('input#').val(),
-        priority: $('input#').val(),
-        title: $('input#').val(),
-        description: $('input#').val()
+        due_date: $('input#taskDueDate').val(),
+        completed: $('input#taskCompleted').is(':checked'),
+        priority: $('select#taskPriority').val(),
+        title: $('input#taskTitle').val(),
+        description: $('textarea#taskDescription').val()
         }
       }
     }).done(function(data) {
@@ -70,18 +70,63 @@ var PM = (function (module) {
     });
   };
 
-  module.createSubtask = function(event, id) {
+  module.updateTask = function() {
+    $('#container').on('click', '#update-task-button', PM.showTaskForm) , function() {
+        $('#taskTitle').val('#taskTitle');
+        $('#taskDescription').val('#taskDescription');
+        $('#taskDueDate').val('#taskDueDate');
+        $('#taskCompleted').is(':checked');
+        $('#taskPriority').val('#taskPriority');
+    };
+  };
+
+  module.patchTask = function(event, id) {
     event.preventDefault();
     $.ajax({
-      url: module.apiRoutes + id + '/subtasks',
+      url: module.apiRoutes.tasks + id,
+      type: 'PATCH',
+      headers: { 'AUTHORIZATION': 'Token token=' + authToken },
+      data: { task: {
+        due_date: $('input#taskDueDate').val(),
+        completed: $('input#taskCompleted').is(':checked'),
+        priority: $('select#taskPriority').val(),
+        title: $('input#taskTitle').val(),
+        description: $('textarea#taskDescription').val()
+        }
+      }
+    }).done(function(data) {
+      console.log(data);
+    }).fail(function(jqXHR, textStatus, errorThrown) {
+      console.log(jqXHR, textStatus, errorThrown);
+    });
+  };
+
+  module.deleteTask = function(event, id) {
+    event.preventDefault();
+    $.ajax({
+      url: module.apiRoutes.tasks + id,
+      type: 'DELETE',
+      headers: { 'AUTHORIZATION': 'Token token=' + authToken }
+    }).done(function(data){
+      console.log(data);
+      location.reload();
+    }).fail(function(jqXHR, textStatus, errorThrown) {
+      console.log(jqXHR, textStatus, errorThrown);
+    });
+  };
+
+  module.createSubtask = function(event, project_id) {
+    event.preventDefault();
+    $.ajax({
+      url: module.apiRoutes.tasks + project_id + '/subtasks',
       type: 'GET',
       headers: { 'AUTHORIZATION': 'Token token=' + authToken },
       data: { task: {
-        due_date: $('input#').val(),
-        completed: $('input#').val(),
-        priority: $('input#').val(),
-        title: $('input#').val(),
-        description: $('input#').val()
+        due_date: $('input#taskDueDate').val(),
+        completed: $('input#taskCompleted').is(':checked'),
+        priority: $('select#taskPriority').val(),
+        title: $('input#taskTitle').val(),
+        description: $('textarea#taskDescription').val()
         }
       }
     }).done(function(data) {
@@ -90,6 +135,9 @@ var PM = (function (module) {
       console.log(data);
     });
   };
+
+$('#newTaskForm').on('submit', module.createTask);
+
   return module;
 })(PM || {});
 
