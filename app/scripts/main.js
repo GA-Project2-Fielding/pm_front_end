@@ -7,7 +7,8 @@ var Router = Backbone.Router.extend({
         '': 'home',
         'home': 'home',
         'projects/:id': 'getProject',
-        'tasks/:id': 'getOneTask'
+        'tasks/:id': 'getOneTask',
+        'comments/:id': 'getComment'
     },
     home: PM.renderUser(),
     getProject: function(id){
@@ -15,6 +16,9 @@ var Router = Backbone.Router.extend({
     },
     getOneTask: function(id){
       PM.getOneTask(id);
+    },
+    getComment: function(id){
+      PM.getComment(id);
     }
 });
 
