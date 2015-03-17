@@ -44,6 +44,3 @@ var PM = (function (module) {
 
   return module;
 })(PM || {});
-
-var testTaskId = 1;
-PM.getComments(testTaskId);
