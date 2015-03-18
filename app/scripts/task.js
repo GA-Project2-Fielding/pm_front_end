@@ -37,7 +37,7 @@ var PM = (function (module) {
       localStorage.setItem('taskId', data.id);
       Handlebars.partials = Handlebars.templates;
       var template = Handlebars.templates['taskShowTemplate'];
-      $('#container').html(template({task: data, comments: supercomments}));
+      $('#column-right').html(template({task: data, comments: supercomments}));
     }).fail(function(jqXHR, textStatus, errorThrown) {
       console.log(jqXHR, textStatus, errorThrown);
     });

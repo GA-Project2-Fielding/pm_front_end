@@ -21,7 +21,7 @@ var PM = (function (module) {
     })
     .done(function(data) {
       var template = Handlebars.templates['commentShowTemplate'];
-      $('#container').html(template({comment: data}));
+      $('#column-left').html(template({comment: data}));
     })
     .fail(function() {
       console.log('error');
