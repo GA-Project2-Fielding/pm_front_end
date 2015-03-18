@@ -1,6 +1,6 @@
 <div id='user'>
   <img src={{user.image_url}} alt="Profile Picture"><h1>{{user.user_name}}</h1>
-  <h3>{{user.first_name}} {{user.last_name}}</h3>
+  <h3>{{user.first_name}} {{user.last_name}}</h3><a href="#" class="update-user-link">update</a>
   <h5>Projects:</h5>
   <ul>
     {{#each user.projects}}
@@ -8,7 +8,8 @@
     {{/each}}
   </ul>
   <button id="new-project-button" type="">New Project</button>
-   <div class="form">
+  {{> userform-partial}}
+   <div class="form new">
       <h3>New Project</h3>
         <form id='newProjectForm'>
           <fieldset>

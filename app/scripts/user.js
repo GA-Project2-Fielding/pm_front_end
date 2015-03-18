@@ -92,8 +92,14 @@ var PM = (function (module) {
         headers: { 'AUTHORIZATION': 'Token token=' + authToken },
     }).done(function(data){
         var template = Handlebars.templates['homeTemplate'];
+        Handlebars.partials = Handlebars.templates;
         $('#container').html(template({user: data}));
     });
+  };
+
+  module.showUpdateForm = function(event){
+    event.preventDefault();
+    $('.form.update').toggle();
   };
 
   return module;

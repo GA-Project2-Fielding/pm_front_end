@@ -30,6 +30,7 @@ var setClickHandlers = function(){
   $('#container').on('click', '#new-subtask-button', PM.showForm);
   $('#container').on('submit', '.new-subtask-form .newTaskForm', PM.createSubtask);
   $('#container').on('submit', '.new-comment-form .newCommentForm', PM.createComment);
+  $('#container').on('click', '.update-user-link' , PM.showUpdateForm);
 };
 
 new Router();
