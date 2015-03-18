@@ -91,10 +91,57 @@ var PM = (function (module) {
         type: 'GET',
         headers: { 'AUTHORIZATION': 'Token token=' + authToken },
     }).done(function(data){
+        var template = Handlebars.templates.homeTemplate;
         Handlebars.partials = Handlebars.templates;
-        var template = Handlebars.templates['homeTemplate'];
         $('#sidebar').html(template({user: data}));
+        module.populateUpdateForm(data);
     });
+  };
+
+  module.userUpdateData = function(key){
+    var $file = $('#file_upload');
+    var $password = $('#password-reg');
+
+    var awsKey = key;
+    var data = {user: { email: $('#email-reg').val(),
+                        user_name: $('#user-name').val(),
+                        first_name: $('#first-name').val(),
+                        last_name: $('#last-name').val()
+                      }};
+
+    if ($file.val() !== '' &&  $password.val() !== ''){
+      data.user.password = $('#password-reg').val();
+      data.user.image_url = 'https://s3.amazonaws.com/team-fielding/' + awsKey;
+    }else if($file.val() !== '' && $password.val() === ''){
+      data.user.image_url = 'https://s3.amazonaws.com/team-fielding/' + awsKey;
+    }else if($file.val() === '' && $password.val() !== ''){
+      data.user.password = $('#password-reg').val();
+    }
+    module.updateUser(data);
+  };
+
+  module.updateUser = function(data){
+    var currentUser = localStorage.getItem('currentUser');
+    $.ajax({
+      url: apiRoutes.users + currentUser,
+      type: 'PATCH',
+      headers: { 'AUTHORIZATION': 'Token token=' + authToken },
+      data: data,
+    })
+    .done(function() {
+      module.renderUser();
+    })
+    .fail(function() {
+      console.log('failure');
+    });
+
+  };
+
+  module.populateUpdateForm = function(data){
+    $('#email-reg').val(data.email);
+    $('#user-name').val(data.user_name);
+    $('#first-name').val(data.first_name);
+    $('#last-name').val(data.last_name);
   };
 
   module.showUpdateForm = function(event){

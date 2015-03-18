@@ -32,7 +32,7 @@ var PM = (function (module) {
     }).done(function(data){
       var supertasks = module.getSupertasks(data);
       Handlebars.partials = Handlebars.templates;
-      var template = Handlebars.templates['projectshowTemplate'];
+      var template = Handlebars.templates.projectshowTemplate;
       localStorage.setItem('projectId', data.id);
       $('#content-top').html(template({project: data, tasks: supertasks}));
     }).fail(function(jqXHR, textStatus, errorThrown){

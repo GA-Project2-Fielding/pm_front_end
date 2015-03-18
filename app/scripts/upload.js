@@ -20,12 +20,12 @@ var PM = (function(module){
     event.preventDefault();
     $.get(apiRoutes.amazon, function(data){
       module.unpackRails(data);
-      module.storeKey(data);
+      if(event.target.id === 'user-update-form'){
+        module.userUpdateData(data.key);
+      }else{
+        module.hasProfPic(data.key);
+      }
     });
-  };
-
-  module.storeKey = function(data){
-    module.hasProfPic(data.key);
   };
 
   module.unpackRails = function(data){
@@ -64,7 +64,7 @@ var PM = (function(module){
   module.setAwsHeader = function(){
     $.ajaxPrefilter(function(options){
       options.headers = {};
-      options.headers['Accept'] = 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8';
+      options.headers.Accept = 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8';
     });
   };
 
