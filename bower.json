@@ -10,6 +10,7 @@
     "jquery": ">=2"
   },
   "devDependencies": {
-    "jasmine-jquery": "~2.1.0"
+    "jasmine-jquery": "~2.1.0",
+    "unsemantic": "~1.0.2"
   }
 }
