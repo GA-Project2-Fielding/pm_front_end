@@ -20,7 +20,7 @@ var PM = (function (module) {
       headers: { 'AUTHORIZATION': 'Token token=' + authToken }
     })
     .done(function(data) {
-      var template = Handlebars.templates['commentShowTemplate'];
+      var template = Handlebars.templates.commentShowTemplate;
       $('#container').html(template({comment: data}));
     })
     .fail(function() {

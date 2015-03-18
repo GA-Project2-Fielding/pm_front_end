@@ -32,7 +32,7 @@ var PM = (function (module) {
     }).done(function(data){
       var supertasks = module.getSupertasks(data);
       Handlebars.partials = Handlebars.templates;
-      var template = Handlebars.templates['projectshowTemplate'];
+      var template = Handlebars.templates.projectshowTemplate;
       localStorage.setItem('projectId', data.id);
       $('#container').html(template({project: data, tasks: supertasks}));
     }).fail(function(jqXHR, textStatus, errorThrown){
@@ -79,7 +79,7 @@ var PM = (function (module) {
   };
 
   module.showForm = function(){
-    $('.form').toggle();
+    $('.form.new').toggle();
   };
 
   return module;
