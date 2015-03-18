@@ -1,0 +1,15 @@
+div#sidebar {
+  background: $sidebar-background;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 100%;
+  img {
+    height: 90px;
+    width: auto;
+    border-radius: 5px;
+    display: block;
+    margin: 0 auto;
+    margin-top: 10px;
+  }
+}

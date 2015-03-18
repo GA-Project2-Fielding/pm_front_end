@@ -34,7 +34,7 @@ var PM = (function (module) {
       Handlebars.partials = Handlebars.templates;
       var template = Handlebars.templates['projectshowTemplate'];
       localStorage.setItem('projectId', data.id);
-      $('#container').html(template({project: data, tasks: supertasks}));
+      $('#content-top').html(template({project: data, tasks: supertasks}));
     }).fail(function(jqXHR, textStatus, errorThrown){
       console.log(jqXHR, textStatus, errorThrown);
     });

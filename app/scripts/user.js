@@ -92,7 +92,7 @@ var PM = (function (module) {
         headers: { 'AUTHORIZATION': 'Token token=' + authToken },
     }).done(function(data){
         var template = Handlebars.templates['homeTemplate'];
-        $('#container').html(template({user: data}));
+        $('#sidebar').html(template({user: data}));
     });
   };
 

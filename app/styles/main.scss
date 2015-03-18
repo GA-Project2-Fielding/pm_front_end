@@ -4,14 +4,47 @@
 @import "modules/mixins";
 @import "modules/variables";
 
-
 @import "partials/nav";
+@import "partials/sidebar";
+
+html {
+  height: 100%;
+}
 
 body {
   background: #fafafa;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   color: #333;
-    @include defaults;
+  @include defaults;
+  height: 100%;
+
+}
+
+.grid-container {
+  margin-top: 61px;
+}
+
+#content-top {
+  float: right;
+  height: auto;
+  background: $accent-gray;
+  margin-right: 2px;
+  margin-top: 15px;
+  padding-bottom: 15px;
+}
+
+#column-left {
+  height: 300px;
+  background: $accent-gray;
+  float: right;
+  margin: 21px;
+}
+
+#column-right {
+  height: 300px;
+  background: $accent-gray;
+  float: right;
+  margin: 21px;
 }
 
 .header-image {
