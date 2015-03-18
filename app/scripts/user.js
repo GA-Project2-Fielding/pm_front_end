@@ -102,7 +102,6 @@ var PM = (function (module) {
     var $file = $('#file_upload');
     var $password = $('#password-reg');
 
-    var awsKey = key;
     var data = {user: { email: $('#email-reg').val(),
                         user_name: $('#user-name').val(),
                         first_name: $('#first-name').val(),
@@ -111,9 +110,9 @@ var PM = (function (module) {
 
     if ($file.val() !== '' &&  $password.val() !== ''){
       data.user.password = $('#password-reg').val();
-      data.user.image_url = 'https://s3.amazonaws.com/team-fielding/' + awsKey;
+      data.user.image_url = 'https://s3.amazonaws.com/team-fielding/' + key;
     }else if($file.val() !== '' && $password.val() === ''){
-      data.user.image_url = 'https://s3.amazonaws.com/team-fielding/' + awsKey;
+      data.user.image_url = 'https://s3.amazonaws.com/team-fielding/' + key;
     }else if($file.val() === '' && $password.val() !== ''){
       data.user.password = $('#password-reg').val();
     }
@@ -125,11 +124,14 @@ var PM = (function (module) {
     $.ajax({
       url: apiRoutes.users + currentUser,
       type: 'PATCH',
-      headers: { 'AUTHORIZATION': 'Token token=' + authToken },
+      beforeSend : function(xhr) {
+        xhr.setRequestHeader('AUTHORIZATION', 'Token token=' + authToken);
+      },
       data: data,
     })
-    .done(function() {
-      module.renderUser();
+    .done(function(data) {
+      window.setTimeout(function(){window.location = '/';}, 5 * 1000 );
+      console.log(data);
     })
     .fail(function() {
       console.log('failure');
