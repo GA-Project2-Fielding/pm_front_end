@@ -3,9 +3,9 @@ console.log('task loaded');
 
 var PM = (function (module) {
   var host = 'http://localhost:3000/',
-  authToken = localStorage.getItem('authToken');
-  var projectId = localStorage.getItem('projectId');
-  var taskId = localStorage.getItem('taskId');
+  authToken = localStorage.getItem('authToken'),
+  projectId = localStorage.getItem('projectId'),
+  taskId = localStorage.getItem('taskId');
 
   module.apiRoutes = {
     users: host + 'users/',

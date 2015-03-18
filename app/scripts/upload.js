@@ -3,6 +3,8 @@ console.log('upload.js loaded');
 
 var PM = (function(module){
   var host = 'http://localhost:3000/';
+  var userId = localStorage.getItem('currentUser');
+  var authToken = localStorage.getItem('authToken');
 
   var apiRoutes = {
       users: host + 'users/',
@@ -35,13 +37,30 @@ var PM = (function(module){
     postdata.append('Content-Type', file.type);
     postdata.append('file', file);
 
+    module.storeUrl(data.key);
     module.awsRequest(postdata);
+  };
+
+  module.storeUrl = function(suffix){
+    $.ajax({
+      url: apiRoutes.users + userId,
+      type: 'PATCH',
+      headers: { 'AUTHORIZATION': 'Token token=' + authToken },
+      data: { user: {image_url: 'https://s3.amazonaws.com/team-fielding/' + suffix}}
+    })
+    .done(function() {
+      console.log('success');
+    })
+    .fail(function() {
+      console.log('error');
+    });
+
   };
 
   module.setAwsHeader = function(){
     $.ajaxPrefilter(function(options){
       options.headers = {};
-      options.headers['Accept'] = "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8";
+      options.headers['Accept'] = 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8';
     });
   };
 
@@ -54,8 +73,8 @@ var PM = (function(module){
       processData: false,
       contentType: false
     })
-    .done(function() {
-      console.log('success!!!!!');
+    .done(function(data) {
+      console.log(data);
     })
     .fail(function(errors) {
       console.log(errors);
