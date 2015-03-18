@@ -1,0 +1,43 @@
+nav.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 60px;
+  background: rgba(0, 0, 0, 0.8);
+  font-family: $main-font;
+  font-size: $large-font-size;
+  z-index: 1;
+  ul {
+    @include defaults;
+    list-style: none;
+    li {
+      display: inline-block;
+      margin: 10px;
+      &.brand {
+        font-family: Capsuula, Helvetica, Arial, sans-serif;
+        font-size: $logo-font-size;
+        font-weight: bold;
+        margin-top: 5px;
+      }
+      a {
+        text-decoration: none;
+        color: $white;
+      }
+    }
+  }
+}
+
+li.log-in {
+  float: right;
+  label {
+    display: inline;
+    color: $gray;
+    font-size: $medium-font-size;
+    input {
+      margin: 5px;
+      border-radius: 2px;
+    }
+  }
+}
+

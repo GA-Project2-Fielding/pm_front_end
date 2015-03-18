@@ -1,10 +1,24 @@
 // bower:scss
 // endbower
 
+@import "modules/mixins";
+@import "modules/variables";
+
+
+@import "partials/nav";
+
 body {
   background: #fafafa;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   color: #333;
+    @include defaults;
+}
+
+.header-image {
+  background-image: url('../images/header-image.jpg');
+  background-size: cover;
+  width: 100%;
+  height: 580px;
 }
 
 .hero-unit {
@@ -33,3 +47,4 @@ body {
 .form{
   display: none
 }
+

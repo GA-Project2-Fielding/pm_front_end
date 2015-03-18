@@ -9,6 +9,7 @@
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <!-- build:css(.) styles/vendor.css -->
     <!-- bower:css -->
+    <link rel="stylesheet" href="bower_components/unsemantic/assets/sass/unsemantic-grid-base.scss">
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css(.tmp) styles/main.css -->
@@ -20,26 +21,27 @@
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
+<nav class="navbar">
+  <ul>
+    <li class="brand"><a href="/" title="">Project Manage This</a></li>
+    <li class="log-in"><form id='loginForm'>
+      <label for='email'>
+        <input type='text' name='email' id='email'autofocus='true' />
+        User e-mail
+      </label>
+      <label for='password'>
+        <input type='password' name='password' id='password' />
+        Password
+      </label>
+      <button type='submit'>Sign In</button></li>
+    </form>
 
-    <div class="hero-unit">
-      <h3>Sign In</h3>
-        <form id='loginForm'>
-          <fieldset>
-            <label for='email'>
-              <input type='text' name='email' id='email'autofocus='true' />
-              User e-mail
-            </label>
-            <br>
-            <label for='password'>
-              <input type='password' name='password' id='password' />
-              Password
-            </label>
-          </fieldset>
-
-          <button type='submit'>Sign In</button>
-        </form>
-    </div>
-
+  </ul>
+</nav>
+<div class="grid-container">
+  <div class="grid-25">
+  <div class='main-content'>
+    <div class='header-image'></div>
     <div class="hero-unit">
       <h3>Register</h3>
         <form id='registrationForm'>
@@ -73,6 +75,9 @@
           <button type='submit'>Sign Up</button>
         </form>
     </div>
+  </div>
+  </div>
+</div>
 
 
     <!-- build:js(.) scripts/vendor.js -->
