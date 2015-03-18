@@ -4,6 +4,7 @@ console.log('comment loaded');
 var PM = (function (module) {
   var host = 'http://localhost:3000/',
   authToken = localStorage.getItem('authToken');
+  var taskId = localStorage.getItem('taskId');
 
   module.apiRoutes = {
     users: host + 'users/',
@@ -42,18 +43,21 @@ var PM = (function (module) {
     });
   };
 
-  module.createComment = function(){
+  module.createComment = function(event){
+    event.preventDefault();
     $.ajax({
-      url: '/path/to/file',
-      type: 'default GET (Other values: POST)',
-      dataType: 'default: Intelligent Guess (Other values: xml, json, script, or html)',
-      data: {param1: 'value1'},
+      url: module.apiRoutes.tasks + taskId + '/comments',
+      type: 'POST',
+      headers: { 'AUTHORIZATION': 'Token token=' + authToken },
+      data: {comment: {
+        body: $('#commentBody').val()
+      }},
     })
-    .done(function() {
-      console.log("success");
+    .done(function(data) {
+      window.location.href = '/#/comments/'+ data.id;
     })
     .fail(function() {
-      console.log("error");
+      console.log('error');
     });
   };
 
