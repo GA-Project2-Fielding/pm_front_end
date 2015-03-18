@@ -91,9 +91,15 @@ var PM = (function (module) {
         type: 'GET',
         headers: { 'AUTHORIZATION': 'Token token=' + authToken },
     }).done(function(data){
+        Handlebars.partials = Handlebars.templates;
         var template = Handlebars.templates['homeTemplate'];
         $('#sidebar').html(template({user: data}));
     });
+  };
+
+  module.showUpdateForm = function(event){
+    event.preventDefault();
+    $('.form.update').toggle();
   };
 
   return module;
