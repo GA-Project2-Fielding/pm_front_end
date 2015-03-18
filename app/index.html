@@ -20,15 +20,42 @@
     <!--[if lt IE 10]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
+    <nav class="navbar">
+      <ul>
+        <li class="brand"><a href="/" title="">Project Manage This</a></li>
+        <li class="log-in"><form id='loginForm'>
+          <label for='email'>
+            <input type='text' name='email' id='email'autofocus='true' />
+            User e-mail
+          </label>
+          <label for='password'>
+            <input type='password' name='password' id='password' />
+            Password
+          </label>
+          <button type='submit'>Sign In</button></li>
+        </form>
+
+      </ul>
+    </nav>
+
     <div class="grid-container">
-      <div class="grid-25">
-      Hello
+      <div class="grid-25" id="sidebar">
+
+      </div>
+      <div class="grid-75" id="content-top">
+
+      </div>
+      <div class="grid-35" id="column-left">
+      </div>
+      <div class="grid-35" id="column-right">
       </div>
     </div>
 
-    <div id='container' class="hero-unit">
-      <h1>Project Manage this!</h1>
-    </div>
+
+      <!-- <div id='container' class="hero-unit">
+
+      </div> -->
+
 
 
     <!-- build:js(.) scripts/vendor.js -->
