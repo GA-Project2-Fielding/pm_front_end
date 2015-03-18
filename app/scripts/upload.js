@@ -28,20 +28,12 @@ var PM = (function(module){
     var a = $('#file_upload')[0];
     var file = a.files[0];
 
-    postdata.key = data.key;
-    postdata.AWSAccessKeyId = data.access_key;
-    postdata.policy = data.policy;
-    postdata.signature = data.signature;
-    postdata.contentType = file.type;
-    postdata.file = file;
-
-    // postdata.set('key', data.key);
-    // postdata.set('AWSAccessKeyId', data.access_key);
-    // postdata.set('policy', data.policy);
-    // postdata.set('signature', data.signature);
-    // postdata.set('contentType', file.type);
-    // postdata.set('file', file);
-
+    postdata.append('key', data.key);
+    postdata.append('AWSAccessKeyId', data.access_key);
+    postdata.append('policy', data.policy);
+    postdata.append('signature', data.signature);
+    postdata.append('Content-Type', file.type);
+    postdata.append('file', file);
 
     module.awsRequest(postdata);
   };
