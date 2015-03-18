@@ -68,6 +68,11 @@
               <input type='password' id='password-reg' name='password' />
               Password
             </label>
+            <br>
+            <label for='file'>
+              <input type='file' name='file' id='file_upload' autofocus='true' />
+              Profile Picture
+            </label>
           </fieldset>
 
           <button type='submit'>Sign Up</button>
@@ -93,8 +98,10 @@
       ga('create','UA-XXXXX-X');ga('send','pageview');
     </script> -->
 
-    <!-- build:js({app,.tmp}) scripts/main.js -->
-    <script src="scripts/user.js"></script>
-    <!-- endbuild -->
+
+        <!-- build:js({app,.tmp}) scripts/main.js -->
+        <script src="scripts/upload.js"></script>
+        <script src="scripts/user.js"></script>
+        <!-- endbuild -->
 </body>
 </html>

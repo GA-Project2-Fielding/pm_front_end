@@ -15,25 +15,43 @@ var PM = (function (module) {
 
   module.runLogin = function(){
     $('#loginForm').on('submit', module.submitLogin);
-    $('#registrationForm').on('submit', module.submitRegistration);
+    $('#registrationForm').on('submit', module.parseRails);
   };
 
-  module.submitRegistration = function(event){
-    event.preventDefault();
+  module.submitRegistration = function(data){
     $.ajax({
       url: apiRoutes.users,
       type: 'POST',
-      data: {user: { email: $('#email-reg').val(),
+      data: data
+    })
+    .done(function(data){
+      module.loginSuccess(data);
+    })
+    .fail(function(errors){
+      console.log(errors);
+    });
+  };
+
+  module.hasProfPic = function(key){
+    var awsKey = key;
+    var data;
+    if ($('#file_upload').val() !== ''){
+       data = {user: { email: $('#email-reg').val(),
+            user_name: $('#user-name').val(),
+            first_name: $('#first-name').val(),
+            last_name: $('#last-name').val(),
+            password: $('#password-reg').val(),
+            image_url: 'https://s3.amazonaws.com/team-fielding/' + awsKey
+          }};
+    }else{
+       data = {user: { email: $('#email-reg').val(),
               user_name: $('#user-name').val(),
               first_name: $('#first-name').val(),
               last_name: $('#last-name').val(),
               password: $('#password-reg').val()
-            }}
-    })
-    .done(module.loginSuccess)
-    .fail(function(errors){
-      console.log(errors);
-    });
+            }};
+    }
+    module.submitRegistration(data);
   };
 
   module.submitLogin = function(event) {
