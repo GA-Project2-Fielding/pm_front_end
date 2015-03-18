@@ -14,5 +14,8 @@
     {{#each comments}}
     <li><a href="/#/comments/{{id}}">{{body}}</a></li>
     {{/each}}
+    <div class='new-comment-form'>
+      {{> commentform-partial}}
+    </div>
   </ul>
 </div>
