@@ -19,9 +19,13 @@ var PM = (function(module){
   module.parseRails = function(event){
     event.preventDefault();
     $.get(apiRoutes.amazon, function(data){
-      console.table(data);
       module.unpackRails(data);
+      module.storeKey(data);
     });
+  };
+
+  module.storeKey = function(data){
+    module.hasProfPic(data.key);
   };
 
   module.unpackRails = function(data){
@@ -30,15 +34,15 @@ var PM = (function(module){
     var a = $('#file_upload')[0];
     var file = a.files[0];
 
-    postdata.append('key', data.key);
-    postdata.append('AWSAccessKeyId', data.access_key);
-    postdata.append('policy', data.policy);
-    postdata.append('signature', data.signature);
-    postdata.append('Content-Type', file.type);
-    postdata.append('file', file);
-
-    module.storeUrl(data.key);
-    module.awsRequest(postdata);
+    if (file){
+      postdata.append('key', data.key);
+      postdata.append('AWSAccessKeyId', data.access_key);
+      postdata.append('policy', data.policy);
+      postdata.append('signature', data.signature);
+      postdata.append('Content-Type', file.type);
+      postdata.append('file', file);
+      module.awsRequest(postdata);
+    }
   };
 
   module.storeUrl = function(suffix){
@@ -73,39 +77,15 @@ var PM = (function(module){
       processData: false,
       contentType: false
     })
-    .done(function(data) {
-      console.log(data);
+    .done(function() {
+      console.log('image sent to amazon');
     })
     .fail(function(errors) {
       console.log(errors);
     });
   };
 
-
-
-  //   $.ajax('https://s3.amazonaws.com/team-fielding', { "access_key": sign_key.access_key }, function(data, textStatus, xhr) {
-  //     /*optional stuff to do after success */
-  //   });
-
-
-  // module.getAmazonKey = function(){
-  //   console.log('hi');
-  //   $.get(apiRoutes.amazon, function(sign_key) {
-  //     module.buildAwsRequest(sign_key);
-  //     // module.sendFileToApi(sign_key.key);
-  //   });
-  // };
-
-  // module.buildAwsRequest = function(){
-  //   console.log('in buildAwsRequest');
-  //   module.getAmazonKey();
-  // };
-
   return module;
 })(PM || {});
-
-$(document).ready(function(){
-$('#fileUploadForm').on('submit', PM.parseRails);
-});
 
 
