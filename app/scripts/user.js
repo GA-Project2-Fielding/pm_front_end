@@ -130,6 +130,7 @@ var PM = (function (module) {
       data: data,
     })
     .done(function(data) {
+      console.table(data);
       window.setTimeout(function(){window.location = '/';}, 5 * 1000 );
       console.log(data);
     })
