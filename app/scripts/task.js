@@ -55,6 +55,7 @@ var PM = (function (module) {
   };
 
   module.createTask = function(event) {
+    projectId = localStorage.getItem('projectId');
     event.preventDefault();
     $.ajax({
       url: module.apiRoutes.projects + projectId + '/tasks',
