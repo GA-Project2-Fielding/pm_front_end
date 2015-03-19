@@ -37,13 +37,14 @@ var PM = (function (module) {
     var awsKey = key;
     var data;
     if ($('#file_upload').val() !== ''){
-       data = {user: { email: $('#email-reg').val(),
+      data = {user: { email: $('#email-reg').val(),
             user_name: $('#user-name').val(),
             first_name: $('#first-name').val(),
             last_name: $('#last-name').val(),
             password: $('#password-reg').val(),
             image_url: 'https://s3.amazonaws.com/team-fielding/' + awsKey
           }};
+      module.deferred.done(function(){module.submitRegistration(data);});
     }else{
        data = {user: { email: $('#email-reg').val(),
               user_name: $('#user-name').val(),
@@ -51,8 +52,8 @@ var PM = (function (module) {
               last_name: $('#last-name').val(),
               password: $('#password-reg').val()
             }};
+      module.submitRegistration(data);
     }
-    module.deferred.done(function(){module.submitRegistration(data);});
   };
 
   module.submitLogin = function(event) {
@@ -110,16 +111,19 @@ var PM = (function (module) {
                         first_name: $('#first-name').val(),
                         last_name: $('#last-name').val()
                       }};
-
     if ($file.val() !== '' &&  $password.val() !== ''){
       data.user.password = $('#password-reg').val();
       data.user.image_url = 'https://s3.amazonaws.com/team-fielding/' + key;
+      module.deferred.done(function(){module.updateUser(data);});
     }else if($file.val() !== '' && $password.val() === ''){
       data.user.image_url = 'https://s3.amazonaws.com/team-fielding/' + key;
+      module.deferred.done(function(){module.updateUser(data);});
     }else if($file.val() === '' && $password.val() !== ''){
       data.user.password = $('#password-reg').val();
+      module.updateUser(data);
+    }else{
+      module.updateUser(data);
     }
-    module.deferred.done(function(){module.updateUser(data);});
   };
 
   module.updateUser = function(data){

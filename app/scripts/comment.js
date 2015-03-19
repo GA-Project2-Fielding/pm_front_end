@@ -53,8 +53,8 @@ var PM = (function (module) {
         body: $('#commentBody').val()
       }},
     })
-    .done(function(data) {
-      window.location.href = '/#/comments/'+ data.id;
+    .done(function() {
+      window.location.href = '/#/tasks/'+ taskId;
     })
     .fail(function() {
       console.log('error');
