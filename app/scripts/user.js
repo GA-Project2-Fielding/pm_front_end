@@ -116,7 +116,7 @@ var PM = (function (module) {
     }else if($file.val() === '' && $password.val() !== ''){
       data.user.password = $('#password-reg').val();
     }
-    module.updateUser(data);
+    module.deferred.done(function(){module.updateUser(data);});
   };
 
   module.updateUser = function(data){
@@ -129,10 +129,8 @@ var PM = (function (module) {
       },
       data: data,
     })
-    .done(function(data) {
-      console.table(data);
-      window.setTimeout(function(){window.location = '/';}, 5 * 1000 );
-      console.log(data);
+    .done(function() {
+      window.location.href = '/';
     })
     .fail(function() {
       console.log('failure');

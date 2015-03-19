@@ -5,6 +5,7 @@ var PM = (function(module){
   var host = 'http://localhost:3000/';
   var userId = localStorage.getItem('currentUser');
   var authToken = localStorage.getItem('authToken');
+  module.deferred = $.Deferred();
 
   var apiRoutes = {
       users: host + 'users/',
@@ -19,12 +20,12 @@ var PM = (function(module){
   module.parseRails = function(event){
     event.preventDefault();
     $.get(apiRoutes.amazon, function(data){
-      module.unpackRails(data);
       if(event.target.id === 'user-update-form'){
         module.userUpdateData(data.key);
       }else{
         module.hasProfPic(data.key);
       }
+      module.unpackRails(data);
     });
   };
 
@@ -79,6 +80,7 @@ var PM = (function(module){
     })
     .done(function() {
       console.log('image sent to amazon');
+      module.deferred.resolve();
     })
     .fail(function(errors) {
       console.log(errors);
