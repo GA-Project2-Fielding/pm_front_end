@@ -30,6 +30,8 @@ var setClickHandlers = function(){
   $('#container').on('click', '#new-subtask-button', PM.showForm);
   $('#container').on('submit', '.new-subtask-form .newTaskForm', PM.createSubtask);
   $('#column-right').on('submit', '.new-comment-form .newCommentForm', PM.createComment);
+  $('#sidebar').on('click', '.update-user-link' , PM.showUpdateForm);
+  $('#sidebar').on('submit', '#user-update-form' , PM.parseRails);
 };
 
 new Router();

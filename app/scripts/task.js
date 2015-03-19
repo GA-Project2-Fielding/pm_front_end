@@ -38,6 +38,7 @@ var PM = (function (module) {
       Handlebars.partials = Handlebars.templates;
       var template = Handlebars.templates['taskShowTemplate'];
       $('#column-right').html(template({task: data, comments: supercomments}));
+
     }).fail(function(jqXHR, textStatus, errorThrown) {
       console.log(jqXHR, textStatus, errorThrown);
     });
@@ -74,15 +75,15 @@ var PM = (function (module) {
     });
   };
 
-  module.updateTask = function() {
-    $('#container').on('click', '#update-task-button', PM.showTaskForm) , function() {
-        $('#taskTitle').val('#taskTitle');
-        $('#taskDescription').val('#taskDescription');
-        $('#taskDueDate').val('#taskDueDate');
-        $('#taskCompleted').is(':checked');
-        $('#taskPriority').val('#taskPriority');
-    };
-  };
+  // module.updateTask = function() {
+  //   $('#container').on('click', '#update-task-button', PM.showTaskForm) , function() {
+  //       $('#taskTitle').val('#taskTitle');
+  //       $('#taskDescription').val('#taskDescription');
+  //       $('#taskDueDate').val('#taskDueDate');
+  //       $('#taskCompleted').is(':checked');
+  //       $('#taskPriority').val('#taskPriority');
+  //   };
+  // };
 
   module.patchTask = function(event, id) {
     event.preventDefault();

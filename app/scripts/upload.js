@@ -5,6 +5,7 @@ var PM = (function(module){
   var host = 'http://localhost:3000/';
   var userId = localStorage.getItem('currentUser');
   var authToken = localStorage.getItem('authToken');
+  module.deferred = $.Deferred();
 
   var apiRoutes = {
       users: host + 'users/',
@@ -19,7 +20,11 @@ var PM = (function(module){
   module.parseRails = function(event){
     event.preventDefault();
     $.get(apiRoutes.amazon, function(data){
-      console.table(data);
+      if(event.target.id === 'user-update-form'){
+        module.userUpdateData(data.key);
+      }else{
+        module.hasProfPic(data.key);
+      }
       module.unpackRails(data);
     });
   };
@@ -30,15 +35,15 @@ var PM = (function(module){
     var a = $('#file_upload')[0];
     var file = a.files[0];
 
-    postdata.append('key', data.key);
-    postdata.append('AWSAccessKeyId', data.access_key);
-    postdata.append('policy', data.policy);
-    postdata.append('signature', data.signature);
-    postdata.append('Content-Type', file.type);
-    postdata.append('file', file);
-
-    module.storeUrl(data.key);
-    module.awsRequest(postdata);
+    if (file){
+      postdata.append('key', data.key);
+      postdata.append('AWSAccessKeyId', data.access_key);
+      postdata.append('policy', data.policy);
+      postdata.append('signature', data.signature);
+      postdata.append('Content-Type', file.type);
+      postdata.append('file', file);
+      module.awsRequest(postdata);
+    }
   };
 
   module.storeUrl = function(suffix){
@@ -60,7 +65,7 @@ var PM = (function(module){
   module.setAwsHeader = function(){
     $.ajaxPrefilter(function(options){
       options.headers = {};
-      options.headers['Accept'] = 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8';
+      options.headers.Accept = 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8';
     });
   };
 
@@ -73,39 +78,16 @@ var PM = (function(module){
       processData: false,
       contentType: false
     })
-    .done(function(data) {
-      console.log(data);
+    .done(function() {
+      console.log('image sent to amazon');
+      module.deferred.resolve();
     })
     .fail(function(errors) {
       console.log(errors);
     });
   };
 
-
-
-  //   $.ajax('https://s3.amazonaws.com/team-fielding', { "access_key": sign_key.access_key }, function(data, textStatus, xhr) {
-  //     /*optional stuff to do after success */
-  //   });
-
-
-  // module.getAmazonKey = function(){
-  //   console.log('hi');
-  //   $.get(apiRoutes.amazon, function(sign_key) {
-  //     module.buildAwsRequest(sign_key);
-  //     // module.sendFileToApi(sign_key.key);
-  //   });
-  // };
-
-  // module.buildAwsRequest = function(){
-  //   console.log('in buildAwsRequest');
-  //   module.getAmazonKey();
-  // };
-
   return module;
 })(PM || {});
-
-$(document).ready(function(){
-$('#fileUploadForm').on('submit', PM.parseRails);
-});
 
 
