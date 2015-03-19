@@ -95,6 +95,8 @@ var PM = (function (module) {
         Handlebars.partials = Handlebars.templates;
         $('#sidebar').html(template({user: data}));
         module.populateUpdateForm(data);
+    }).fail(function(error){
+      module.acceptFailure(error);
     });
   };
 
