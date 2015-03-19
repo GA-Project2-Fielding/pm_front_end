@@ -1,8 +1,8 @@
 <div id='task'>
   <h1>{{task.title}}</h1>
-  <h3>{{task.completed}}</h3>
+  <h2> Completed: {{task.completed}}</h2>
   <ul>
-    <h4>Subtasks:</h4>
+    <h3>Subtasks:</h3>
     {{#each task.subtasks}}
       <li><a href="/#/tasks/{{id}}">{{title}}</a></li>
     {{/each}}
@@ -10,7 +10,7 @@
     <div class='new-subtask-form'>
       {{> taskform-partial}}
     </div>
-    <h4>Comments:</h4>
+    <h3>Comments:</h3>
     {{#each comments}}
     <li><a href="/#/comments/{{id}}">{{body}}</a></li>
     {{/each}}

@@ -9,26 +9,28 @@ div#sidebar {
     img {
       height: 90px;
       width: auto;
-      border-radius: 5px;
+      border-radius: 7px;
       display: block;
       margin: 0 auto;
-      margin-top: 10px;
+      margin-top: 15px;
     }
   }
 }
 
-h1 {
-  font-size: $x-large-font-size;
-  text-align: center;
+
+#sidebar {
+  h1 {
+    font-size: $x-large-font-size;
+    text-align: center;
+  }
+  h2 {
+    font-size: $large-font-size;
+    text-align: center;
+  }
+  h3 {
+    font-size: $large-font-size;
+  }
 }
 
-h2 {
-  font-size: $large-font-size;
-  text-align: center;
-}
-
-h3 {
-  font-size: $large-font-size;
-}
 
 
