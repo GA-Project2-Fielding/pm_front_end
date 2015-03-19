@@ -28,7 +28,7 @@ var setClickHandlers = function(){
   $('#content-top').on('click', '#new-task-button', PM.showTaskForm);
   $('#content-top').on('submit', '.new-task-form .newTaskForm', PM.createTask);
   $('#column-right').on('click', '#new-subtask-button', PM.showSubtaskForm);
-  $('#container').on('submit', '.new-subtask-form .newTaskForm', PM.createSubtask);
+  $('#column-right').on('submit', '.new-subtask-form .newTaskForm', PM.createSubtask);
   $('#column-right').on('submit', '.new-comment-form .newCommentForm', PM.createComment);
   $('#sidebar').on('click', '.update-user-link' , PM.showUpdateForm);
   $('#sidebar').on('submit', '#user-update-form' , PM.parseRails);
