@@ -96,6 +96,28 @@ body {
   display: none;
 }
 
+button {
+  @include button;
+}
+
+a {
+  @include links;
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+#task {
+  margin-right: 10px;
+  h1 {
+    font-size: $x-large-font-size;
+    text-align: center;
+  }
+  h2 {
+    text-align: center;
+    font-size: $large-font-size;
+  }
+}
 
 
 // webfonts

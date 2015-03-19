@@ -41,3 +41,9 @@ li.log-in {
   }
 }
 
+button#sign-out {
+  @include button;
+  float: right;
+  margin: 8px 11px 8px 8px;
+}
+

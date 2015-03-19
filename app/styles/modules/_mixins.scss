@@ -4,3 +4,19 @@
   position: relative;
   box-sizing: border-box;
 }
+
+@mixin button {
+  padding: 9px;
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 17px;
+  color: #333333;
+  border-radius: 4px;
+  background: $gray;
+  margin: 7px;
+}
+
+@mixin links {
+  text-decoration: none;
+  color: #000066;
+  font-size: 20px;
+}
