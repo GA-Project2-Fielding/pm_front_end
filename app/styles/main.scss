@@ -86,7 +86,11 @@ body {
   display: none;
 }
 
-.form{
+.form.update{
+  display: none;
+}
+
+.new-subtask-form{
   display: none;
 }
 
