@@ -36,8 +36,9 @@ var PM = (function (module) {
       var supercomments = module.getSupercomments(data);
       localStorage.setItem('taskId', data.id);
       Handlebars.partials = Handlebars.templates;
-      var template = Handlebars.templates.taskShowTemplate;
-      $('#container').html(template({task: data, comments: supercomments}));
+      var template = Handlebars.templates['taskShowTemplate'];
+      $('#column-right').html(template({task: data, comments: supercomments}));
+
     }).fail(function(jqXHR, textStatus, errorThrown) {
       console.log(jqXHR, textStatus, errorThrown);
     });
@@ -140,7 +141,13 @@ var PM = (function (module) {
     });
   };
 
-$('#newTaskForm').on('submit', module.createTask);
+  module.showTaskForm = function(){
+    $('.new-task-form').toggle();
+  };
+
+$('.newTaskForm').on('submit', module.createTask);
+
+
 
   return module;
 })(PM || {});
