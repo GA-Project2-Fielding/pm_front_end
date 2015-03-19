@@ -79,7 +79,7 @@ var PM = (function (module) {
   };
 
   module.showForm = function(){
-    $('.projectForm').toggle();
+    $('.form.new').toggle();
   };
 
   return module;

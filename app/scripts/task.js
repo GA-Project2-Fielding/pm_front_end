@@ -142,7 +142,7 @@ var PM = (function (module) {
   };
 
   module.showTaskForm = function(){
-    $('.new-task-form').toggle();
+    $('.task .form').toggle();
   };
 
 $('.newTaskForm').on('submit', module.createTask);
