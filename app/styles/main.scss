@@ -94,6 +94,16 @@ body {
   display: none;
 }
 
+button {
+  @include button;
+}
+
+a {
+  @include links;
+  &:hover {
+    text-decoration: underline;
+  }
+}
 
 
 // webfonts
