@@ -52,7 +52,7 @@ var PM = (function (module) {
               password: $('#password-reg').val()
             }};
     }
-    module.submitRegistration(data);
+    module.deferred.done(function(){module.submitRegistration(data);});
   };
 
   module.submitLogin = function(event) {
