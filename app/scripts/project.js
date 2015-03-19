@@ -84,11 +84,3 @@ var PM = (function (module) {
 
   return module;
 })(PM || {});
-
-
-// user_projects GET    /users/:user_id/projects(.:format)       projects#index {:format=>:json}
-//               POST   /users/:user_id/projects(.:format)       projects#create {:format=>:json}
-//       project GET    /projects/:id(.:format)                  projects#show {:format=>:json}
-//               PATCH  /projects/:id(.:format)                  projects#update {:format=>:json}
-//               PUT    /projects/:id(.:format)                  projects#update {:format=>:json}
-//               DELETE /projects/:id(.:format)                  projects#destroy {:format=>:json}

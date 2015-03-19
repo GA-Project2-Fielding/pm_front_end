@@ -16,6 +16,7 @@ var PM = (function (module) {
   module.runLogin = function(){
     $('#loginForm').on('submit', module.submitLogin);
     $('#registrationForm').on('submit', module.parseRails);
+    $('#sign-out').on('click', module.signOut);
   };
 
   module.submitRegistration = function(data){
@@ -95,6 +96,8 @@ var PM = (function (module) {
         Handlebars.partials = Handlebars.templates;
         $('#sidebar').html(template({user: data}));
         module.populateUpdateForm(data);
+    }).fail(function(error){
+      module.acceptFailure(error);
     });
   };
 
@@ -148,6 +151,12 @@ var PM = (function (module) {
   module.showUpdateForm = function(event){
     event.preventDefault();
     $('.form.update').toggle();
+  };
+
+  module.signOut = function(event){
+    event.preventDefault();
+    localStorage.clear();
+    window.location.href = '/';
   };
 
   return module;

@@ -36,7 +36,7 @@ var PM = (function (module) {
       var supercomments = module.getSupercomments(data);
       localStorage.setItem('taskId', data.id);
       Handlebars.partials = Handlebars.templates;
-      var template = Handlebars.templates['taskShowTemplate'];
+      var template = Handlebars.templates.taskShowTemplate;
       $('#column-right').html(template({task: data, comments: supercomments}));
 
     }).fail(function(jqXHR, textStatus, errorThrown) {
@@ -142,7 +142,7 @@ var PM = (function (module) {
   };
 
   module.showTaskForm = function(){
-    $('.new-task-form').toggle();
+    $('.task .form').toggle();
   };
 
 $('.newTaskForm').on('submit', module.createTask);
