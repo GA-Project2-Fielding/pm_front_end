@@ -15,8 +15,8 @@ body {
   background: #fafafa;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   color: #333;
-  @include defaults;
   height: 100%;
+  @include defaults;
 
 }
 
@@ -26,7 +26,7 @@ body {
 
 #content-top {
   float: right;
-  height: auto;
+  min-height: 300px;
   background: $accent-gray;
   margin-right: 2px;
   margin-top: 15px;
@@ -34,14 +34,14 @@ body {
 }
 
 #column-left {
-  height: 300px;
+  min-height: 300px;
   background: $accent-gray;
   float: right;
   margin: 21px;
 }
 
 #column-right {
-  height: 300px;
+  min-height: 300px;
   background: $accent-gray;
   float: right;
   margin: 21px;
@@ -77,8 +77,12 @@ body {
   padding: 0.2em 0;
 }
 
-.form{
+.projectForm {
   display: none
+}
+
+.new-task-form {
+  display: none;
 }
 
 

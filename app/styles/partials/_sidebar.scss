@@ -4,12 +4,31 @@ div#sidebar {
   left: 0;
   bottom: 0;
   height: 100%;
-  img {
-    height: 90px;
-    width: auto;
-    border-radius: 5px;
-    display: block;
-    margin: 0 auto;
-    margin-top: 10px;
+  div#user {
+    margin-left: 10px;
+    img {
+      height: 90px;
+      width: auto;
+      border-radius: 5px;
+      display: block;
+      margin: 0 auto;
+      margin-top: 10px;
+    }
   }
 }
+
+h1 {
+  font-size: $x-large-font-size;
+  text-align: center;
+}
+
+h2 {
+  font-size: $large-font-size;
+  text-align: center;
+}
+
+h3 {
+  font-size: $large-font-size;
+}
+
+
