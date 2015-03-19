@@ -5,6 +5,7 @@ var PM = (function(module){
   var host = 'http://localhost:3000/';
   var userId = localStorage.getItem('currentUser');
   var authToken = localStorage.getItem('authToken');
+  module.deferred = $.Deferred();
 
   var apiRoutes = {
       users: host + 'users/',
@@ -19,13 +20,13 @@ var PM = (function(module){
   module.parseRails = function(event){
     event.preventDefault();
     $.get(apiRoutes.amazon, function(data){
+      if(event.target.id === 'user-update-form'){
+        module.userUpdateData(data.key);
+      }else{
+        module.hasProfPic(data.key);
+      }
       module.unpackRails(data);
-      module.storeKey(data);
     });
-  };
-
-  module.storeKey = function(data){
-    module.hasProfPic(data.key);
   };
 
   module.unpackRails = function(data){
@@ -64,7 +65,7 @@ var PM = (function(module){
   module.setAwsHeader = function(){
     $.ajaxPrefilter(function(options){
       options.headers = {};
-      options.headers['Accept'] = 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8';
+      options.headers.Accept = 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8';
     });
   };
 
@@ -79,6 +80,7 @@ var PM = (function(module){
     })
     .done(function() {
       console.log('image sent to amazon');
+      module.deferred.resolve();
     })
     .fail(function(errors) {
       console.log(errors);
