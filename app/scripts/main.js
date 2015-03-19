@@ -23,7 +23,7 @@ var Router = Backbone.Router.extend({
 });
 
 var setClickHandlers = function(){
-  $('#sidebar').on('click', '#new-project-button', PM.showProjectForm);
+  $('#sidebar').on('click', '#new-project-button', PM.showForm);
   $('#sidebar').on('submit', '#newProjectForm', PM.submitProject);
   $('#content-top').on('click', '#new-task-button', PM.showTaskForm);
   $('#content-top').on('submit', '.new-task-form .newTaskForm', PM.createTask);
