@@ -1,6 +1,8 @@
-// bower:scss
-@import "unsemantic/assets/sass/partials/unsemantic-grid-responsive";
-// endbower
+$unsemantic-ie7-support: false;
+@import "../bower_components/unsemantic/assets/sass/partials/unsemantic-vars";
+@import "../bower_components/unsemantic/assets/sass/partials/reset";
+@import "../bower_components/unsemantic/assets/sass/partials/text";
+@import "../bower_components/unsemantic/assets/sass/partials/unsemantic-grid-responsive";
 
 @import "modules/mixins";
 @import "modules/variables";
