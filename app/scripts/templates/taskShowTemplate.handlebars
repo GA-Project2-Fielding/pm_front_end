@@ -1,6 +1,8 @@
 <div id='task'>
   <h1>{{task.title}}</h1>
   <h2> Completed: {{task.completed}}</h2>
+  <h2> Due Date: {{task.due_date}}</h2>
+  <h2> Priority: {{task.priority}}</h2>
   <ul>
     <h3>Subtasks:</h3>
     {{#each task.subtasks}}
