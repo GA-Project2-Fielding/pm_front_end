@@ -1,6 +1,10 @@
-// bower:scss
-@import "unsemantic/assets/sass/partials/unsemantic-grid-responsive";
-// endbower
+//bower:scss
+$unsemantic-ie7-support: false;
+@import "../bower_components/unsemantic/assets/sass/partials/unsemantic-vars";
+@import "../bower_components/unsemantic/assets/sass/partials/reset";
+@import "../bower_components/unsemantic/assets/sass/partials/text";
+@import "../bower_components/unsemantic/assets/sass/partials/unsemantic-grid-responsive";
+//endbower
 
 @import "modules/mixins";
 @import "modules/variables";
@@ -23,6 +27,7 @@ body {
 
 .grid-container {
   margin-top: 61px;
+  line-height: 30px;
 }
 
 #content-top {
@@ -60,7 +65,7 @@ body {
   width: 300px;
   font-size: 18px;
   font-weight: 200;
-  line-height: 30px;
+  line-height: 10px;
   background-color: #eee;
   border-radius: 6px;
   padding: 60px;
@@ -98,7 +103,7 @@ button {
   @include button;
 }
 
-a {
+.grid-container a {
   @include links;
   &:hover {
     text-decoration: underline;
@@ -106,7 +111,7 @@ a {
 }
 
 #task {
-  margin-right: 10px;
+  margin: 20px 10px 0 20px;
   h1 {
     font-size: $x-large-font-size;
     text-align: center;
@@ -115,6 +120,29 @@ a {
     text-align: center;
     font-size: $large-font-size;
   }
+}
+
+#project {
+  margin: 20px 0 0 20px;
+  h1 {
+    font-size: $x-large-font-size;
+    text-align: center;
+  }
+  h2 {
+    text-align: center;
+    font-size: $large-font-size;
+  }
+}
+
+#comment {
+  margin: 20px 0 0 20px;
+  h1 {
+    font-size: $x-large-font-size;
+  }
+  h2 {
+    font-size: $large-font-size;
+  }
+
 }
 
 
@@ -132,3 +160,4 @@ a {
   font-style: normal;
 
 }
+
