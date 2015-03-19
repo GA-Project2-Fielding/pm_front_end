@@ -140,7 +140,13 @@ var PM = (function (module) {
     });
   };
 
-$('#newTaskForm').on('submit', module.createTask);
+  module.showTaskForm = function(){
+    $('.new-task-form').toggle();
+  };
+
+$('.newTaskForm').on('submit', module.createTask);
+
+
 
   return module;
 })(PM || {});
